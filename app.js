@@ -336,3 +336,137 @@ const authManager = new SupabaseAuthManager(supabase);
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { AuthManager, SupabaseAuthManager };
 }
+
+
+
+
+// Smooth scroll navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.navs ul a');
+    
+    // Add click event listeners to navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default anchor behavior
+            
+            const linkText = this.querySelector('li').textContent.trim().toLowerCase();
+            let targetSection = null;
+            
+            // Map navigation links to their corresponding sections
+            switch(linkText) {
+                case 'home':
+                    targetSection = document.querySelector('.main');
+                    break;
+                case 'features':
+                    targetSection = document.querySelector('.features');
+                    break;
+                case 'about us':
+                    targetSection = document.querySelector('.about');
+                    break;
+                case 'contact us':
+                    targetSection = document.querySelector('.footer');
+                    break;
+            }
+            
+            // Smooth scroll to the target section
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Optional: Add active navigation highlighting based on scroll position
+    function updateActiveNavigation() {
+        const sections = [
+            { element: document.querySelector('.main'), navText: 'home' },
+            { element: document.querySelector('.features'), navText: 'features' },
+            { element: document.querySelector('.about'), navText: 'about us' },
+            { element: document.querySelector('.footer'), navText: 'contact us' }
+        ];
+        
+        const scrollPosition = window.scrollY + 100; // Offset for better detection
+        
+        sections.forEach(section => {
+            if (section.element) {
+                const sectionTop = section.element.offsetTop;
+                const sectionHeight = section.element.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    // Remove active class from all nav links
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Add active class to current section's nav link
+                    const activeLink = Array.from(navLinks).find(link => 
+                        link.querySelector('li').textContent.trim().toLowerCase() === section.navText
+                    );
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+        });
+    }
+    
+    // Listen for scroll events to update active navigation
+    window.addEventListener('scroll', updateActiveNavigation);
+    
+    // Initial call to set active navigation on page load
+    updateActiveNavigation();
+    
+    // Also add smooth scroll to the "Get Started" and "Learn More" buttons
+    const getStartedBtns = document.querySelectorAll('.Start, .get-started');
+    getStartedBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // If it's not already redirecting to Register page
+            if (!this.onclick) {
+                e.preventDefault();
+                // You can customize where these buttons should scroll to
+                // For example, scroll to features section
+                const featuresSection = document.querySelector('.features');
+                if (featuresSection) {
+                    featuresSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Add smooth scroll to "Learn More" buttons in features
+    const learnMoreBtns = document.querySelectorAll('.learn');
+    learnMoreBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const aboutSection = document.querySelector('.about');
+            if (aboutSection) {
+                aboutSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
+// Optional: Add CSS for smooth scrolling fallback
+const style = document.createElement('style');
+style.textContent = `
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    .navs ul a.active {
+        color: #007bff; /* Change this to your preferred active color */
+        font-weight: bold;
+    }
+    
+    .navs ul a.active li {
+        color: inherit;
+    }
+`;
+document.head.appendChild(style);
