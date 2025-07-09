@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 body {
-    background-color: rgb(20, 37, 72);
+    background-color: rgb(19, 50, 111);
     color: white;
     font-family: 'Outfit', sans-serif;
     /* height: 100%; */
@@ -53,9 +53,8 @@ ul {
     list-style: none;
     position: relative;
     left: 200px;
-    gap: 20px;
+    gap: 40px;
     text-decoration: none;
-
 }
 
 
@@ -210,6 +209,7 @@ ul a {
     font-size: 18px;
     position: relative;
     bottom: 30px;
+    width: 660px;
 }
 
 
@@ -386,7 +386,7 @@ ul a {
 .small-hero {
     position: relative;
     height: 40px;
-    width: 300px;
+    width: 260px;
     /* background-color: rgb(144, 144, 1); */
     position: relative;
     left: 40px;
@@ -411,7 +411,7 @@ ul a {
 }
 
 .hero {
-    width: 530px;
+    width: 630px;
     position: relative;
     left: 40px;
     font-size: 35px;
@@ -422,7 +422,7 @@ ul a {
 
 
 .little-hero {
-    width: 400px;
+    width: 540px;
     position: relative;
     left: 40px;
     bottom: 10px;
@@ -525,7 +525,7 @@ small-hero {
     width: 100%;
     /* background-color: green; */
     position: absolute;
-    top: 1000px;
+    top: 1020px;
 
 }
 
@@ -750,7 +750,7 @@ small-hero {
     width: 100%;
     /* background-color: grey; */
     position: relative;
-    top: 980px;
+    top: 990px;
 
 }
 
@@ -1021,10 +1021,10 @@ small-hero {
     }
 }
 
-.about.animate .selected {
+/* .about.animate .selected {
     animation: pulse 2s ease-in-out infinite;
     animation-delay: 2.5s;
-}
+} */
 
 /* Advanced version - with additional micro-animations */
 .about .right-about .ab {
@@ -1056,7 +1056,7 @@ small-hero {
     width: 100%;
     /* background-color: green; */
     position: absolute;
-    top: 1860px;
+    top: 1880px;
     
 }
 
