@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Registration - SalesPro Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-bar {
+            background: #f8fafc;
+            height: 6px;
+            position: relative;
+            margin: 0 40px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .step {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            accent-color: #3b82f6;
+        }
+
+        .checkbox-group label {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #4b5563;
+            margin: 0;
+        }
+
+        .checkbox-group a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .staff-invite-container {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .staff-invite-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .staff-invite-item input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .add-staff-btn {
+            background: none;
+            border: 2px dashed #3b82f6;
+            color: #3b82f6;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-staff-btn:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .remove-staff-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-staff-btn:hover {
+            background: #dc2626;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: #3b82f6;
+        }
+
+        .step-dot.completed {
+            background: #10b981;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .success-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .success-description {
+            color: #64748b;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .staff-invite-item {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to SalesPro</h1>
+            <p>Register your business and start growing your sales today</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step-dot active" data-step="1"></div>
+            <div class="step-dot" data-step="2"></div>
+            <div class="step-dot" data-step="3"></div>
+            <div class="step-dot" data-step="4"></div>
+        </div>
+
+        <div class="form-container">
+            <!-- Step 1: Administrator Details -->
+            <div class="step active" id="step1">
+                <h2 class="step-title">Administrator Details</h2>
+                <p class="step-description">Let's start by setting up your administrator account</p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" placeholder="Doe" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@company.com" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Create a strong password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Business Details -->
+            <div class="step" id="step2">
+                <h2 class="step-title">Business Information</h2>
+                <p class="step-description">Tell us about your business</p>
+                
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" placeholder="Your Company Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Business Address</label>
+                    <textarea id="address" rows="3" placeholder="Street address, City, State, ZIP Code" required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+1 (555) 123-4567" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="businessEmail">Business Email</label>
+                        <input type="email" id="businessEmail" placeholder="info@company.com" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Terms & Privacy -->
+            <div class="step" id="step3">
+                <h2 class="step-title">Terms & Privacy</h2>
+                <p class="step-description">Review and accept our terms to continue</p>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="termsAccept" required>
+                    <label for="termsAccept">
+                        I agree to the <a href="#" target="_blank">Terms of Service</a> and acknowledge that I have read and understood the terms governing the use of this platform.
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="privacyAccept" required>
+                    <label for="privacyAccept">
+                        I accept the <a href="#" target="_blank">Privacy Policy</a> and consent to the collection and processing of my personal data as described.
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="marketingAccept">
+                    <label for="marketingAccept">
+                        I would like to receive marketing communications, product updates, and promotional offers from SalesPro.
+                    </label>
+                </div>
+            </div>
+
+            <!-- Step 4: Staff Invitations -->
+            <div class="step" id="step4">
+                <h2 class="step-title">Invite Your Team</h2>
+                <p class="step-description">Invite staff members to join your sales platform (optional)</p>
+                
+                <div class="staff-invite-container">
+                    <div id="staffInvites">
+                        <div class="staff-invite-item">
+                            <input type="email" placeholder="team-member@company.com">
+                            <button type="button" class="remove-staff-btn" onclick="removeStaffInvite(this)">Remove</button>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="add-staff-btn" onclick="addStaffInvite()">
+                        <span>+ Add Another Team Member</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="step" id="success" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">✓</div>
+                    <h2 class="success-title">Registration Complete!</h2>
+                    <p class="success-description">
+                        Your business account has been successfully created. You'll receive a confirmation email shortly with next steps to get started with your sales platform.
+                    </p>
+                    <button class="btn btn-primary" onclick="window.location.href='#dashboard'">
+                        Go to Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <div class="button-group" id="buttonGroup">
+                <button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="display: none;">
+                    Previous
+                </button>
+                <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+                    Next Step
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Update step indicators
+            document.querySelectorAll('.step-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) {
+                    dot.classList.add('completed');
+                } else if (index + 1 === currentStep) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            // Update buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const buttonGroup = document.getElementById('buttonGroup');
+            
+            if (step === 1) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'block';
+            }
+            
+            if (step === totalSteps) {
+                nextBtn.textContent = 'Complete Registration';
+            } else {
+                nextBtn.textContent = 'Next Step';
+            }
+            
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    // Complete registration
+                    completeRegistration();
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function validateCurrentStep() {
+            const currentStepElement = document.getElementById(`step${currentStep}`);
+            const requiredFields = currentStepElement.querySelectorAll('input[required], textarea[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    field.style.borderColor = '#ef4444';
+                    setTimeout(() => {
+                        field.style.borderColor = '#e2e8f0';
+                    }, 3000);
+                    return false;
+                }
+            }
+            
+            // Additional validation for step 1 (password confirmation)
+            if (currentStep === 1) {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                if (password !== confirmPassword) {
+                    document.getElementById('confirmPassword').style.borderColor = '#ef4444';
+                    alert('Passwords do not match');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function addStaffInvite() {
+            const staffInvites = document.getElementById('staffInvites');
+            const newInvite = document.createElement('div');
+            newInvite.className = 'staff-invite-item';
+            newInvite.innerHTML = `
+                <input type="email" placeholder="team-member@company.com">
+                <button type="button" class="remove-staff-btn" onclick="removeStaffInvite(this)">Remove</button>
+            `;
+            staffInvites.appendChild(newInvite);
+        }
+
+        function removeStaffInvite(button) {
+            const staffInvites = document.getElementById('staffInvites');
+            if (staffInvites.children.length > 1) {
+                button.parentElement.remove();
+            }
+        }
+
+        function completeRegistration() {
+            // Hide form and show success message
+            document.getElementById('buttonGroup').style.display = 'none';
+            document.querySelector('.step-indicator').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+            document.getElementById('success').style.display = 'block';
+            
+            // Here you would typically send the data to your server
+            console.log('Registration completed!');
+        }
+
+        // Initialize
+        showStep(1);
+    </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="onboarding.js"></script>
+
+
+</body>
+</html>

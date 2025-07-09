@@ -1,0 +1,1121 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+body {
+    background-color: rgb(20, 37, 72);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    /* height: 100%; */
+    overflow-x: hidden;
+    /* margin: 0;
+    padding: 0; */
+}
+
+/* it doesnt undertand */
+
+
+
+
+
+
+/* the glowing “cloud” of blue in the centre */
+
+
+
+
+.navs {
+    height: 60px;
+    width: 100%;
+    /* background-color: grey; */
+    display: flex;
+    position: relative;
+    top: 10px;
+}
+
+.logo {
+    height: 40px;
+    width: 180px;
+    /* background-color: red; */
+    position: relative;
+    top: 10px;
+    left: 40px;
+    overflow: hidden;
+}
+
+.logo img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    position: relative;
+    left: 200px;
+    gap: 20px;
+    text-decoration: none;
+
+}
+
+
+li {
+    font-size: 20px;
+
+}
+
+ul a {
+    text-decoration: none;
+    position: relative;
+    top: 3px;
+    color: white;
+}
+
+.main {
+    height: 400px;
+    width: 100%;
+    /* background-color: green; */
+    position: relative;
+    top: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex
+}
+
+
+.content {
+    height: 400px;
+    width: 600px;
+    /* background-color: grey; */
+    position: relative;
+    justify-content: center;
+    display: flex;
+    display: block;
+}
+
+.small-info {
+    height: 40px;
+    width: 300px;
+    /* background-color: rgb(42, 87, 184); */
+    position: relative;
+    border-radius: 20px;
+    left: 26%;
+    text-align: center;
+    box-shadow:
+        inset 0 1px 2px rgba(176, 175, 175, 0.25),
+        /* inner highlight */
+        0 4px 12px rgba(184, 184, 184, 0.15);
+    background: linear-gradient(to right,
+            var(--pill-gradient-start),
+            var(--pill-gradient-end));
+    color: var(--pill-text);
+}
+
+.small-info p {
+    font-size: 16px;
+    position: relative;
+    top: 10px;
+    font-weight: 500;
+}
+
+.hero-message {
+    font-size: 28px;
+    /* background-color: red; */
+    text-align: center;
+    position: relative;
+    bottom: 20px;
+}
+
+:root {
+    --brand-blue: #00B4FF;
+}
+
+.underline-slab {
+    position: relative;
+    color: var(--brand-blue);
+    /* make room for the underline: tweak as needed */
+    padding-bottom: 0.2em;
+}
+
+.underline-slab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    /* thickness of the main bar */
+    background: var(--brand-blue);
+    /* clip‑path to give slanted ends — play with the %’s! */
+    clip-path: polygon(5% 0, 95% 0, 100% 100%, 0% 100%);
+}
+
+/* optional second, lighter “shadow” line */
+.underline-slab::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    /* shift down a bit */
+    width: 100%;
+    height: 2px;
+    /* thickness of the highlight */
+    background: var(--brand-blue);
+    opacity: 0.6;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+
+:root {
+    --brand-blue: #00B4FF;
+}
+
+.underline-slab {
+    position: relative;
+    display: inline-block;
+    /* ← allow width/height on ::before/::after */
+    color: var(--brand-blue);
+    padding-bottom: 0.2em;
+    /* space for the underline */
+}
+
+.underline-slab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6px;
+    /* thickness of the main bar */
+    background: var(--brand-blue);
+    clip-path: polygon(5% 0, 95% 0, 100% 100%, 0% 100%);
+}
+
+.underline-slab::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    /* small offset for highlight/shadow */
+    width: 100%;
+    height: 2px;
+    /* thickness of the highlight */
+    background: var(--brand-blue);
+    opacity: 0.6;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+}
+
+
+
+.hero-message p {
+    font-size: 18px;
+    position: relative;
+    bottom: 30px;
+}
+
+
+.get-started {
+    height: 50px;
+    width: 250px;
+    background-color: blue;
+    border: none;
+    position: relative;
+    bottom: 30px;
+    border-radius: 30px;
+    font-size: 20px;
+    color: white;
+}
+
+
+
+.small-info {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.8);
+            animation: slideInFade 0.8s ease-out 0.3s forwards;
+        }
+
+        .the-hero {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUpFade 1s ease-out 0.8s forwards;
+        }
+
+        .breif-hero {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUpFade 0.8s ease-out 1.3s forwards;
+        }
+
+        .get-started {
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: buttonEntrance 0.8s ease-out 1.8s forwards;
+        }
+
+        /* Underline animation */
+        .underline-slab::after {
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineGrow 0.8s ease-out 1.5s forwards;
+        }
+
+        .underline-slab::before {
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underlineGrow 0.8s ease-out 1.6s forwards;
+        }
+
+        /* Keyframes */
+        @keyframes slideInFade {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes buttonEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            70% {
+                transform: translateY(-5px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes underlineGrow {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        /* Hover effects */
+        .get-started:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .small-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                inset 0 1px 2px rgba(176, 175, 175, 0.25),
+                0 8px 25px rgba(184, 184, 184, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        /* Subtle floating animation for the small-info after initial load */
+        .small-info {
+            animation: slideInFade 0.8s ease-out 0.3s forwards,
+                       float 3s ease-in-out 2.5s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Pulse effect for the button */
+        .get-started {
+            animation: buttonEntrance 0.8s ease-out 1.8s forwards,
+                       pulse 2s ease-in-out 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(0, 0, 255, 0);
+            }
+        }
+
+        /* Text reveal animation for hero title */
+        .the-hero {
+            overflow: hidden;
+            position: relative;
+        }
+
+
+        @keyframes textReveal {
+            0% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+
+
+.next-main {
+    /* background-color: green; */
+    height: 400px;
+    position: absolute;
+    width: 100%;
+    top: 620px;
+    display: flex;
+    /* overflow: hidden; */
+}
+
+.left {
+    width: 600px;
+    height: 400px;
+    /* overflow: hidden; */
+    /* background-color: blue; */
+}
+
+
+.small-hero {
+    position: relative;
+    height: 40px;
+    width: 300px;
+    /* background-color: rgb(144, 144, 1); */
+    position: relative;
+    left: 40px;
+    top: 30px;
+    border-radius: 30px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 2px rgba(176, 175, 175, 0.25),
+        /* inner highlight */
+        0 4px 12px rgba(184, 184, 184, 0.15);
+    background: linear-gradient(to right,
+            var(--pill-gradient-start),
+            var(--pill-gradient-end));
+    color: var(--pill-text);
+}
+
+.small-hero p {
+    font-size: 18px;
+    bottom: 10px;
+    position: relative;
+}
+
+.hero {
+    width: 530px;
+    position: relative;
+    left: 40px;
+    font-size: 35px;
+    position: relative;
+    top: 10px;
+    font-weight: 600;
+}
+
+
+.little-hero {
+    width: 400px;
+    position: relative;
+    left: 40px;
+    bottom: 10px;
+}
+
+.buttons-next {
+    height: 50px;
+    width: 300px;
+    /* background-color: green; */
+    position: relative;
+    left: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.Start {
+    height: 40px;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+
+}
+
+.Learn-more {
+    height: 40px;
+    color: white;
+    width: 200px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.Learn-more:hover {
+    border: 1px solid blue;
+
+}
+
+
+
+small-hero {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+.hero {
+    transform: translateX(-120px);
+    opacity: 0;
+    transition: all 0.8s ease-out 0.3s; /* 0.3s delay */
+}
+
+.little-hero {
+    transform: translateX(-80px);
+    opacity: 0;
+    transition: all 0.8s ease-out 0.6s; /* 0.6s delay */
+}
+
+.buttons-next {
+    transform: translateX(-60px);
+    opacity: 0;
+    transition: all 0.8s ease-out 0.9s; /* 0.9s delay */
+}
+
+/* Animated state - when container is in view */
+.left.animate .small-hero {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.left.animate .hero {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.left.animate .little-hero {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.left.animate .buttons-next {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.right {
+    /* background-color: grey; */
+    height: 400px;
+    width: 620px;
+}
+
+
+.features{
+    height: 400px;
+    width: 100%;
+    /* background-color: green; */
+    position: absolute;
+    top: 1000px;
+
+}
+
+.head {
+    position: relative;
+    left: 40px;
+    bottom: 10px;
+}
+
+.features-cont{
+    height: 300px;
+    width: 100%;
+    /* background-color: grey; */
+    position: relative;
+    top: 10px;
+    display: flex;
+    gap: 150px;
+}
+
+.feature{
+    height: 300px;
+    width: 300px;
+    background: linear-gradient(135deg, #007BFF 0%, #000000 100%);
+    position: relative;
+    left: 40px;
+    border-radius: 20px;
+}
+
+
+.feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+
+  /* 1px white dots fading to transparent */
+  background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+  /* tile every 15px for a fairly dense starfield */
+  background-size: 15px 15px;
+}
+
+.circle{
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(135deg, #007BFF 10%, #000000 90%);
+    border-radius: 50%;
+    position: relative;
+    bottom: 30px;
+    left: 30px;
+    text-align: center;
+}
+
+.circle i{
+    font-size: 30px;
+    position: relative;
+    top: 14px;
+}
+
+
+.header{
+    /* background-color: red; */
+    position: relative;
+    bottom: 50px;
+    position: relative;
+    left: 20px;
+    width: 280px;
+    font-size: 18px;
+}
+
+.text{
+    overflow: hidden;
+    position: relative;
+    bottom: 80px;
+    left: 20px;
+    width: 270px;
+    font-size: 18px;
+}
+
+.learn{
+    width: 150px;
+    height: 35px;
+    background-color: yellow;
+    position: relative;
+    bottom: 85px;
+    left: 20px;
+    border-radius: 20px;
+    color: black;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+}
+
+.learn p{
+    position: relative;
+    font-size: 18px;
+    bottom: 13px;
+}
+
+
+/* Features Section Animation */
+
+/* Head animation - comes from left */
+.features .head {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+/* Features container and individual features - come from bottom */
+.features-cont {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.8s ease-out 0.3s; /* 0.3s delay after head */
+}
+
+.feature {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease-out;
+}
+
+/* Staggered animation for each feature */
+.feature:nth-child(1) {
+    transition-delay: 0.5s;
+}
+
+.feature:nth-child(2) {
+    transition-delay: 0.7s;
+}
+
+.feature:nth-child(3) {
+    transition-delay: 0.9s;
+}
+
+/* Animated state - when features container is in view */
+.features.animate .head {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.features.animate .features-cont {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.features.animate .feature {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Optional: Enhanced animations for feature elements */
+.feature .circle {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.feature .header {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.feature .text {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.feature .learn {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+/* Enhanced animated state for feature elements */
+.features.animate .feature .circle {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 0.2s;
+}
+
+.features.animate .feature .header {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+
+.features.animate .feature .text {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+.features.animate .feature .learn {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.5s;
+}
+
+/* Staggered delays for each feature's internal elements */
+.feature:nth-child(1) .circle { transition-delay: 0.7s; }
+.feature:nth-child(1) .header { transition-delay: 0.8s; }
+.feature:nth-child(1) .text { transition-delay: 0.9s; }
+.feature:nth-child(1) .learn { transition-delay: 1.0s; }
+
+.feature:nth-child(2) .circle { transition-delay: 0.9s; }
+.feature:nth-child(2) .header { transition-delay: 1.0s; }
+.feature:nth-child(2) .text { transition-delay: 1.1s; }
+.feature:nth-child(2) .learn { transition-delay: 1.2s; }
+
+.feature:nth-child(3) .circle { transition-delay: 1.1s; }
+.feature:nth-child(3) .header { transition-delay: 1.2s; }
+.feature:nth-child(3) .text { transition-delay: 1.3s; }
+.feature:nth-child(3) .learn { transition-delay: 1.4s; }
+
+
+
+.about{
+    height: 400px;
+    width: 100%;
+    /* background-color: grey; */
+    position: relative;
+    top: 980px;
+
+}
+
+.about-cont{
+    height: 400px;
+    width: 1200px;
+    background: linear-gradient(
+    135deg,
+    #0057b373 0%,   /* deep, vibrant blue */
+    #02448a 40%,  /* mid-tone bright blue */
+    #000000 100%  /* black at the far edge */
+  );
+    position: relative;
+    left: 40px;
+    border-radius: 20px;
+    display: flex;
+}
+
+.ab{
+    position: relative;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    /* background-color: red; */
+    font-size: 28px;
+}
+
+.ab-text{
+    width: 600px;
+    position: relative;
+    left: 20px;
+    top: 10px;
+}
+
+.selects
+{
+    height: 60px;
+    width: 560px;
+    background-color: rgba(44, 72, 229, 0.594);
+    position: relative;
+    left: 20px;
+    top: 10px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.select{
+    height: 45px;
+    width: auto;
+    min-width: 100px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+    border-radius: 5px;
+    left: 10px;
+    text-align: center;
+}
+
+.select.active {
+  background-color: rgba(34, 34, 150, 0.598);
+}
+
+.select p{
+    font-size: 18px;
+    position: relative;
+    bottom: 8px;
+}
+
+.selected{
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    left: 20px;
+}
+
+.selected-desc{
+    width: 600px;
+    position: relative;
+    left: 20px;
+    bottom: 10px;
+}
+
+.right-about{
+    /* background-color: rgb(54, 54, 120); */
+    width: 700px;
+    height: 400px;
+}
+
+.left-about{
+    height: 400px;
+    width: 500px;
+    /* background-color: green; */
+    overflow: hidden;
+}
+
+.left-about img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+.about .right-about {
+    transform: translateX(100px);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+/* Left about section - slides in from left */
+.about .left-about {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.8s ease-out 0.2s; /* 0.2s delay */
+}
+
+/* Individual elements in right-about */
+.about .right-about .ab {
+    transform: translateY(-30px);
+    opacity: 0;
+    transition: all 0.6s ease-out;
+}
+
+.about .right-about .ab-text {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.6s ease-out;
+}
+
+.about .selects {
+    transform: translateY(40px);
+    opacity: 0;
+    transition: all 0.7s ease-out;
+}
+
+.about .select {
+    transform: translateX(-30px);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.about .selected {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.6s ease-out;
+}
+
+.about .selected-desc {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.7s ease-out;
+}
+
+/* Image animation with scale effect */
+.about .left-about img {
+    transform: scale(0.8) rotate(-5deg);
+    opacity: 0;
+    transition: all 0.8s ease-out;
+}
+
+/* Animated state - when about container is in view */
+.about.animate .right-about {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.about.animate .left-about {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.about.animate .right-about .ab {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+
+.about.animate .right-about .ab-text {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.5s;
+}
+
+.about.animate .selects {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.7s;
+}
+
+.about.animate .select {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Staggered animation for each select item */
+.about.animate .select:nth-child(1) {
+    transition-delay: 0.8s;
+}
+
+.about.animate .select:nth-child(2) {
+    transition-delay: 0.9s;
+}
+
+.about.animate .select:nth-child(3) {
+    transition-delay: 1.0s;
+}
+
+.about.animate .select:nth-child(4) {
+    transition-delay: 1.1s;
+}
+
+.about.animate .select:nth-child(5) {
+    transition-delay: 1.2s;
+}
+
+.about.animate .selected {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 1.3s;
+}
+
+.about.animate .selected-desc {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 1.4s;
+}
+
+.about.animate .left-about img {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+/* Enhanced hover effects for select items */
+.about.animate .select {
+    transition: all 0.3s ease;
+}
+
+.about.animate .select:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating animation for image after initial load */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.about.animate .left-about img {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: 2s; /* Start floating after initial animation */
+}
+
+/* Pulse effect for selected item */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.about.animate .selected {
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: 2.5s;
+}
+
+/* Advanced version - with additional micro-animations */
+.about .right-about .ab {
+    position: relative;
+    overflow: hidden;
+}
+
+.about .right-about .ab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.about.animate .right-about .ab::before {
+    left: 100%;
+    transition-delay: 0.5s;
+}
+
+
+
+
+.footer{
+    height: 200px;
+    width: 100%;
+    /* background-color: green; */
+    position: absolute;
+    top: 1860px;
+    
+}
+
+
+#the-logo{
+    position: relative;
+    left: 550px;
+    top: 20px;
+}
+
+.links{
+    position: relative;
+    left: 210px;
+    top: 20px;
+    
+}
+
+ul a{
+    color: #a5bdd6;
+}
+
+ul a:hover{
+    color: #02448a;
+}
+
+
+.soc {
+
+    height: 30px;
+    width: 200px;
+    /* background-color: white; */
+    position: relative;
+    top: 30px;
+
+}
+
+.soc i {
+    font-size: 24px;
+    color: #007BFF;
+}
+
+.soc i:hover {
+    font-size: 24px;
+    color: #1b426d;
+}
+
+.soc {
+    display: flex;
+    gap: 30px;
+    position: relative;
+    left: 80px;
+}
+
+.soc a {
+    color: #000;
+}
+
+.social{
+    position: relative;
+    left: 500px;
+    
+}
