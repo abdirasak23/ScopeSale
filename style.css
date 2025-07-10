@@ -67,7 +67,7 @@ ul a {
     text-decoration: none;
     position: relative;
     top: 3px;
-    color: white;
+    /* color: white; */
 }
 
 .main {
@@ -1078,6 +1078,11 @@ ul a{
     color: #a5bdd6;
 }
 
+.navs ul a.active {
+        color: #007bff; /* Change this to your preferred active color */
+        font-weight: bold;
+    }
+
 ul a:hover{
     color: #02448a;
 }
@@ -1118,4 +1123,453 @@ ul a:hover{
     position: relative;
     left: 500px;
     
+}
+
+
+@media only screen and (min-width: 481px) and (max-width: 768px){
+    html, body{
+        /* background-color: red; */
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    
+
+    .navs{
+        /* background-color: grey; */
+    }
+
+
+    .logo{
+        /* background-color: green; */
+    }
+
+    .navs ul{
+        display: none;
+    }
+
+
+    .content{
+        /* background-color: green; */
+        
+    }
+
+    .small-info{
+        width: 250px;
+        position: relative;
+    }
+
+    
+
+    .the-hero {
+        font-size: 50px;
+        /* background-color: grey; */
+        width: 450px;
+        position: relative;
+        left: 18px;
+    }
+
+    .hero-message p{
+        width: 400px;
+        /* background-color: blue; */
+        position: relative;
+        left: 50px;
+    }
+
+    .next-main{
+        /* background-color: grey; */
+        display: block;
+        height: 800px;
+        position: relative;
+        top: 155px;
+    }
+
+    .left{
+        /* background-color: rgb(92, 92, 2); */
+        width: 460px;
+        overflow: hidden;
+        height: 420px;
+    }
+
+    .small-hero{
+        position: relative;
+        left: 10px;
+    }
+
+    .hero{
+        position: relative;
+        left: 10px;
+        width: 450px;
+    }
+
+    .little-hero{
+        position: relative;
+        left: 10px;
+        width: 450px;
+    }
+
+    .buttons-next{
+        position: relative;
+        left: 10px;
+    }
+
+    .right{
+        width: 480px;
+        overflow: hidden;
+        /* background-color: grey; */
+    }
+
+    .right img{
+        height: 100%;
+        width: 100%;
+    }
+
+    .features{
+        position: relative;
+        top: 180px;
+        left: 0px;
+        /* background-color: grey; */
+    }
+
+    .head{
+        position: relative;
+        left: 10px;
+    }
+
+
+    .features-cont{
+        /* background-color: yellowgreen; */
+        display: block;
+        position: absolute;
+        bottom: 60px;
+    }
+
+    .feature{
+        width: 400px;
+        position: relative;
+        left: 10px;
+        margin-top: 60px;
+        position: relative;
+    }
+
+
+    .about{
+        position: relative;
+        top: 880px;
+        /* left: 10px; */
+    }
+
+    .about-cont{
+        position: relative;
+        left: 10px;
+        /* background-color: rgb(23, 143, 25); */
+        display: block;
+        width: 470px;
+        height: 840px;
+    }
+
+    .left-about{
+        width: 470px;
+        top: 40px;
+        position: relative;
+    }
+
+
+    .ab-text{
+        width: 440px;
+    }
+
+    .selects{
+        /* background-color: green; */
+        width: 450px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        height: 120px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 10px;
+    }
+    
+
+    .selected-desc{
+        width: 450px;
+    }
+
+    #anl {
+        width: 80px;
+        /* font-size: 14px; */
+    }
+
+    #billing{
+        position: relative;
+        bottom: 10px;
+    }
+
+    .footer{
+        position: relative;
+        top: 1340px ;
+        z-index: 999;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        /* background-color: blueviolet; */
+    }
+
+    .foot-cont{
+        position: relative;
+        right: 400px;
+    }
+
+    .links a{
+        position: relative;
+        right: 30px;
+        /* background-color: green; */
+
+    }
+
+    .social{
+        position: relative;
+        right: 20px;
+    }
+
+
+    .navs .logo{
+        position: relative;
+        left: 160px;
+    }
+    
+    
+} 
+
+
+@media only screen and (max-width: 480px) {
+    html, body{
+        /* background-color: red; */
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
+
+    
+
+    .navs{
+        /* background-color: green; */
+    }
+
+    .navs ul{
+        display: none;
+    }
+
+    .navs .logo{
+        position: relative;
+        left: 100px;
+    }
+
+    .content{
+        /* background-color: rgb(104, 104, 11); */
+        width: 340px;
+    }
+
+    .small-info
+    {
+        position: relative;
+        left: 45px;
+        width: 250px;
+       
+        
+    }
+
+    .breif-hero{
+        color: rgba(245, 245, 245, 0.644);
+ /* font-size: 14px; */
+    }
+
+
+    .hero-message{
+        
+        font-size: 18px;
+        position: relative;
+        left: 0px;
+        /* background-color: grey; */
+        width: 200px;
+    }
+
+    .hero-message p{
+        position: relative;
+        right: 20px;
+    }
+
+    .the-hero{
+        width: 380px;
+        position: relative;
+        right: 20px !important;
+    }
+
+    .hero-message p{
+        width: 340px;
+        /* background-color: blue; */
+        position: relative;
+        left: 0px;
+    }
+
+    .get-started{
+        position: relative;
+        left: 45px;
+    }
+
+
+    .next-main{
+        /* background-color: green; */
+        display: block;
+        position: relative;
+        top: 40px;
+        
+    }
+
+    .left{
+        /* background-color: grey; */
+        height: 300px;
+    }
+
+    .small-hero{
+        position: relative;
+        left: 10px;
+    }
+
+    .hero{
+        position: relative;
+        left: 10px;
+        width: 340px;
+        font-size: 24px;
+    }
+
+    .little-hero{
+        position: relative;
+        left: 10px;
+        top: 0px;
+        /* background-color: green; */
+        width: 340px;
+    }
+
+    .right{
+        /* background-color: red; */
+        width: 340px;
+        overflow: hidden;
+        height: 300px;
+        position: relative;
+        top: 60px;
+
+    }
+
+    .right img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .buttons-next{
+        position: relative;
+        left: 10px;
+        
+    }
+
+
+
+    .features{
+        position: relative;
+        top: 320px;
+    }
+
+    .head{
+        position: relative;
+        left: 10px;
+    }
+
+    .features-cont{
+        /* background-color: grey; */
+        display: block;
+        position: relative;
+    }
+
+    .feature{
+        position: relative;
+        left: 10px;
+        width: 340px;
+        margin-top:50px;
+        bottom: 30px;
+    }
+
+    
+
+
+
+.about{
+    position: relative;
+    top: 990px;
+}
+
+.about-cont{
+    position: relative;
+    left: 10px;
+    width: 360px;
+    height: 900px;
+    display: block;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.left-about{
+    position: relative;
+    top: 130px;
+    width: 360px;
+    height: 360px;
+    overflow: hidden;
+/* background-color: red; */
+}
+
+
+.ab-text{
+    width: 340px;
+}
+
+.selects{
+    /* background-color: green; */
+    width: 360px;
+    display: grid;
+    gap: 0px;
+    left: 0px;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 130px;
+}
+
+#dash{
+    font-size: 10px;
+}
+
+.selected-desc{
+    width: 320px;
+}
+
+
+.footer{
+    position: relative;
+    top: 1490px;
+    /* background-color: gray; */
+}
+
+.foot-cont{
+    position: relative;
+    right: 450px;
+}
+
+.links ul a li{
+    font-size: 16px;
+    /* background-color: red; */
+    gap: 10px;
+    position: relative;
+    left: 10px;
+    
+}
+
 }
