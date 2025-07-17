@@ -16,23 +16,29 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 function showAlert(message, type) {
     const alertContainer = document.querySelector('.alert');
     const alertMessage = alertContainer.querySelector('p');
-    alertMessage.textContent = message;
     
-    // Set background color based on the alert type
-    if (type === 'success') {
-        alertContainer.style.backgroundColor = 'green';
-    } else if (type === 'error') {
-        alertContainer.style.backgroundColor = 'red';
+    if (alertContainer && alertMessage) {
+        alertMessage.textContent = message;
+        
+        // Set background color based on the alert type
+        if (type === 'success') {
+            alertContainer.style.backgroundColor = 'green';
+        } else if (type === 'error') {
+            alertContainer.style.backgroundColor = 'red';
+        } else {
+            alertContainer.style.backgroundColor = '';
+        }
+        // Display the alert container
+        alertContainer.style.display = 'block';
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            alertContainer.style.display = 'none';
+        }, 5000);
     } else {
-        alertContainer.style.backgroundColor = '';
+        // Fallback to console if alert container not found
+        console.log(`${type.toUpperCase()}: ${message}`);
     }
-    // Display the alert container
-    alertContainer.style.display = 'block';
-    
-    // Auto-hide after 5 seconds
-    setTimeout(() => {
-        alertContainer.style.display = 'none';
-    }, 5000);
 }
 
 /**
@@ -99,7 +105,7 @@ async function handleEmailPasswordUserData(user) {
         if (checkError && checkError.code !== 'PGRST116') {
             console.error('Error checking existing user:', checkError);
             showAlert('Error checking user data. Please try again.', 'error');
-            return;
+            return false;
         }
 
         // If user doesn't exist, insert new user data
@@ -117,10 +123,12 @@ async function handleEmailPasswordUserData(user) {
             if (insertError) {
                 console.error('Error inserting user into users table:', insertError);
                 showAlert(`Error saving user data: ${insertError.message}`, 'error');
-                return;
+                return false;
             } else {
                 console.log('User data saved successfully in users table');
             }
+        } else {
+            console.log('User already exists in users table - logging in');
         }
 
         return true;
@@ -198,11 +206,15 @@ document.addEventListener("DOMContentLoaded", () => {
             showLoader(true);
 
             try {
-                // First, try to sign in with email/password
+                console.log('Attempting login with email:', email);
+                
+                // Sign in with email/password
                 const { data, error } = await supabase.auth.signInWithPassword({ 
                     email: email, 
                     password: password 
                 });
+
+                console.log('Login response:', { data, error });
 
                 if (error) {
                     console.error('Login error:', error);
@@ -220,8 +232,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                if (data.user) {
+                // Check if we have a user and session
+                if (data.user && data.session) {
                     console.log('User logged in successfully:', data.user);
+                    console.log('Session created:', data.session);
                     
                     // Handle user data
                     const userDataHandled = await handleEmailPasswordUserData(data.user);
@@ -229,18 +243,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (userDataHandled) {
                         showAlert("Login successful! Redirecting...", "success");
                         
+                        // Clear form
+                        emailInput.value = '';
+                        passwordInput.value = '';
+                        
                         // Delay redirection to let the user see the success alert
                         setTimeout(() => {
-                            const redirectPath = localStorage.getItem('redirectAfterLogin') || "/Onboarding/";
+                            const redirectPath = localStorage.getItem('redirectAfterLogin') || "../Dashboard/";
                             localStorage.removeItem('redirectAfterLogin');
+                            console.log('Redirecting to:', redirectPath);
                             window.location.href = redirectPath;
                         }, 1500);
                     }
                 } else {
+                    console.error('Login failed: No user or session returned');
                     showAlert("Login failed. Please try again.", "error");
                 }
             } catch (err) {
-                console.error("Unexpected error:", err);
+                console.error("Unexpected error during login:", err);
                 showAlert("Something went wrong. Please try again.", "error");
             } finally {
                 showLoader(false);
@@ -255,6 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
             [emailInput, passwordInput].forEach(input => {
                 input.addEventListener("keypress", (e) => {
                     if (e.key === "Enter") {
+                        e.preventDefault();
                         loginButton.click();
                     }
                 });
@@ -277,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const { data, error } = await supabase.auth.signInWithOAuth({
                     provider: 'google',
                     options: {
-                        redirectTo: window.location.origin + window.location.pathname,
+                        redirectTo: window.location.origin + '/Dashboard/',
                         queryParams: {
                             access_type: 'offline',
                             prompt: 'consent',
@@ -370,7 +391,7 @@ async function handleGoogleUserData(user) {
 
         // Redirect after successful Google authentication
         setTimeout(() => {
-            const redirectPath = localStorage.getItem('redirectAfterLogin') || '../Onboarding/';
+            const redirectPath = localStorage.getItem('redirectAfterLogin') || '../Dashboard/';
             localStorage.removeItem('redirectAfterLogin');
             window.location.href = redirectPath;
         }, 2000);
@@ -391,7 +412,7 @@ supabase.auth.onAuthStateChange(async (event, session) => {
         const user = session.user;
         
         // Check if this is a Google OAuth user
-        if (user.app_metadata?.provider === 'google' || user.aud === 'authenticated') {
+        if (user.app_metadata?.provider === 'google') {
             // Only handle Google user data if we're on the login page
             // This prevents the handler from running on other pages
             if (window.location.pathname.includes('login') || window.location.pathname.includes('Login')) {
@@ -420,7 +441,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (window.location.pathname.includes('login') || window.location.pathname.includes('Login')) {
                 showAlert('Already logged in! Redirecting...', 'success');
                 setTimeout(() => {
-                    window.location.href = '../Onboarding/';
+                    window.location.href = '../Dashboard/';
                 }, 1500);
             }
         }

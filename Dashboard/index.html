@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dash.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+    <title>Scope Sale</title>
+    <style>
+        .home.active {
+            background-color: rgba(68, 73, 79, 0.2);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <div class="top">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Scope Sale Logo">
+            </div>
+
+            <div class="search-container">
+                <div class="search">
+                    <div class="icon-search">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <input type="text" placeholder="Search for products, brands and more" id="searchInput">
+                </div>
+
+                <div class="recommendations" id="recommendations">
+                    <!-- Recommendations will be populated here -->
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="cart" data-target="cart-content">
+                <i class='bxr  bx-cart'></i>
+            </div>
+
+
+
+
+        </div>
+        <div class="center-side">
+            <div class="left-slides">
+                <div class="home active" data-target="home-content">
+                    <i class='bxr  bx-home'></i>
+                    <p>Home</p>
+                </div>
+                <div class="home active" data-target="product-content">
+                    <i class='bxr  bx-package'></i>
+                    <p>Products</p>
+                </div>
+                <div class="home" id="below" data-target="orders-content">
+                    <i class='bxr  bx-shopping-bag-alt'></i>
+                    <p>Orders</p>
+                </div>
+                <div class="home" id="below" data-target="black-content">
+                    <i class='bxr  bx-list-square'></i>
+                    <p>List</p>
+                </div>
+
+                <div class="profile">
+                    <div class="home logout" id="below" data-target="black-content">
+                        <i class='bxr  bx-arrow-out-right-square-half'></i>
+                        <p>logout</p>
+                    </div>
+                    <div class="home profiles" id="below" data-target="profile-content">
+                        <i class='bxr  bx-user'></i>
+                        <p>Profile</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="content">
+                <div class="content-section active" id="home-content">
+                    <div class="home-display">
+                        <div class="revenue">
+                            <div class="revs">
+                                <h1 class="rev">Revenue</h1>
+                                <p class="all-time">All Time</p>
+                            </div>
+                            <div class="num">
+                                <h1 class="number">$543</h1>
+                            </div>
+                        </div>
+                        <div class="saler">
+                            <div class="sale">
+                                <div class="sall">
+                                    <p class="sal">Total Products</p>
+                                    <p class="all-time-sal">All Time</p>
+                                </div>
+                                <div class="sc">
+                                    <h2 class="sale-count">5</h2>
+                                </div>
+                            </div>
+                            <div class="sale">
+                                <div class="sall">
+                                    <p class="sal">Total Orders</p>
+                                    <p class="all-time-sal">All Time</p>
+                                </div>
+                                <div class="sc">
+                                    <h2 class="sale-count">5</h2>
+                                </div>
+                            </div>
+                            <div class="sale">
+                                <div class="sall">
+                                    <p class="sal">Product Sold</p>
+                                    <p class="all-time-sal">All Time</p>
+                                </div>
+                                <div class="sc">
+                                    <h2 class="sale-count">5</h2>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="chart-pay">
+                            <div class="sales-activity-container">
+                                <div class="chart-header">
+                                    <div class="chart-title">Sales Activity</div>
+                                    <div class="time-selector">Week</div>
+                                </div>
+
+                                <div class="chart-container">
+                                    <div class="y-axis">
+                                        <div>4K</div>
+                                        <div>3K</div>
+                                        <div>2K</div>
+                                        <div>1K</div>
+                                        <div>0K</div>
+                                    </div>
+
+                                    <div class="chart-area">
+                                        <svg class="chart-svg" viewBox="0 0 500 180">
+                                            <defs>
+                                                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.3" />
+                                                    <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0" />
+                                                </linearGradient>
+                                            </defs>
+
+                                            <!-- Area fill -->
+                                            <path class="chart-area-fill"
+                                                d="M 0 90 Q 35 50 70 55 Q 105 60 140 65 Q 175 70 210 75 Q 245 80 280 25 Q 315 30 350 90 Q 385 95 420 85 Q 455 80 490 20 L 490 180 L 0 180 Z">
+                                            </path>
+
+                                            <!-- Main line -->
+                                            <path class="chart-line"
+                                                d="M 0 90 Q 35 50 70 55 Q 105 60 140 65 Q 175 70 210 75 Q 245 80 280 25 Q 315 30 350 90 Q 385 95 420 85 Q 455 80 490 20">
+                                            </path>
+
+                                            <!-- Data points -->
+                                            <circle class="data-point" cx="70" cy="55" r="3"></circle>
+                                            <circle class="data-point" cx="140" cy="65" r="3"></circle>
+                                            <circle class="data-point" cx="210" cy="75" r="3"></circle>
+                                            <circle class="data-point highlight-point" cx="280" cy="25" r="6"></circle>
+                                            <circle class="data-point" cx="350" cy="90" r="3"></circle>
+                                            <circle class="data-point" cx="420" cy="85" r="3"></circle>
+                                            <circle class="data-point" cx="490" cy="20" r="3"></circle>
+
+                                            <!-- Value label for highlighted point -->
+                                            <text class="value-label" x="280" y="15">1.8k</text>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div class="x-axis">
+                                    <div class="day-label">SUN</div>
+                                    <div class="day-label">MON</div>
+                                    <div class="day-label">TUE</div>
+                                    <div class="day-label">WED</div>
+                                    <div class="day-label">THU</div>
+                                    <div class="day-label">FRI</div>
+                                    <div class="day-label">SAT</div>
+                                </div>
+
+                                <div class="tooltip" id="tooltip"></div>
+                            </div>
+                            <div class="payment-option">
+                                <h3>Payment Option</h3>
+                                <div class="pays">
+                                    <div class="cash">
+                                        <p>Cash</p>
+                                        <div class="count">
+                                            <p class="cash-c">$33</p>
+                                        </div>
+                                    </div>
+                                    <div class="cash online">
+                                        <p>Online</p>
+                                        <div class="count on">
+                                            <p class="cash-c">$33</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="content-section active" id="product-content">
+                <div class="pro">
+                    <div class="product">
+                        <div class="product-info">
+                            <div class="info-left">
+                                <p class="thename">Product Name</p>
+                                <p class="category">Product Category</p>
+                            </div>
+                            <div class="info-right">
+                                <p class="price">434 /-</p>
+                                <p class="stock">In Stock</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="content-section" id="orders-content">
+                <div class="head-top">
+                    <p class="checked">2 selected</p>
+                    <button class="delete">Delete</button>
+                    <div class="exports">
+                        <p>Export</p>
+                    </div>
+                </div>
+                <div class="the-order">
+                    <div class="orders">
+                        <div class="column one">
+                            <div class="row header">
+                                <input type="checkbox" name="check" value="yes">
+                                <p class="head">OrderID</p>
+                            </div>
+                            <div class="row data">
+                                <input type="checkbox" name="check" value="yes">
+                                <p class="data-info">ORD001</p>
+                            </div>
+                            <div class="row data">
+                                <input type="checkbox" name="check" value="yes">
+                                <p class="data-info">ORD001</p>
+                            </div>
+                        </div>
+                        <div class="column two">
+                            <div class="row header">
+                                <p class="head">Total Products</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">Iphone 13</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">Iphone 13</p>
+                            </div>
+                        </div>
+                        <div class="column three">
+                            <div class="row header">
+                                <p class="head">Total Price</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">$400</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">$400</p>
+                            </div>
+                        </div>
+                        <div class="column four">
+                            <div class="row header">
+                                <p class="head">Payment</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">Online</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">Online</p>
+                            </div>
+                        </div>
+                        <div class="column five">
+                            <div class="row header">
+                                <p class="head">Order Date</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info date">10/02/2005</p>
+                            </div>
+                            <div class="row data">
+                                <p class="data-info">10/02/2005</p>
+                            </div>
+
+
+
+                        </div>
+                        <div class="column six">
+                            <div class="row header">
+                                <p class="head">Receipt</p>
+                            </div>
+                            <div class="row data">
+                                <a href="">
+                                    <p class="data-info receipt">view</p>
+                                </a>
+                            </div>
+                            <div class="row data">
+                                <a href="">
+                                    <p class="data-info receipt">view</p>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-section" id="black-content">
+                <div class="add">
+                    <h2 class="form-title">Add New Product</h2>
+
+                    <form id="productForm">
+                        <div class="form-group">
+                            <label class="form-hint">Product Name</label>
+                            <input type="text" class="form-input" id="productName" placeholder="Enter product name..."
+                                required>
+                        </div>
+
+                        <div class="form-group" id="prices">
+                            <label class="form-hint">Price ($)</label>
+                            <input type="number" class="form-input" id="price" placeholder="0.00" step="0.01" min="0"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-hint">Category</label>
+                            <select class="form-select" id="category" required>
+                                <option value="">Select a category...</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="clothing">Food</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="prices">
+                            <label class="form-hint">Stock Quantity</label>
+                            <input type="number" class="form-input" id="stock" placeholder="Enter stock quantity..."
+                                min="0" required>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Submit Product
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="content-section" id="cart-content">
+                <div class="cart-section">
+                    <div class="cart-product">
+                        <div class="cart-left">
+                            <p class="cart-name">Unknown Name</p>
+                            <p class="cart-price">Price: 24/-</p>
+                        </div>
+                        <div class="cart-right">
+                            <div class="quantity">
+                                <div class="plus">
+                                    <i class='bxr bx-plus'></i>
+                                </div>
+                                <p class="qua">01</p>
+                                <div class="minus">
+                                    <i class='bxr bx-minus'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-cart">
+
+                        <div class="last">
+                            <div class="total">
+                                <p>Total: 434 /-</p>
+                            </div>
+                            <select class="payment" required>
+                                <option value="">Pay With...</option>
+                                <option value="electronics">Cash</option>
+                                <option value="clothing">Online</option>
+                            </select>
+                            <div class="sell">
+                                <p>Sell Now
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section" id="profile-content">
+                <div class="profile-section">
+                    <div class="profile-sect">
+                        <div class="img-sect">
+                            <div class="image-pro">
+                                <img src="../images/image.png" alt="">
+                            </div>
+                            <div class="camera">
+                                <i class='bx bx-camera'></i>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <h4 class="name">User Name here</h4>
+                            <p class="role">Admin</p>
+                            <p class="address">Knowledge park 3, Greater noida</p>
+                        </div>
+                    </div>
+
+                    <div class="personal-info">
+                        <div class="the-head">
+                            <p class="per-head">
+                                Personal Information
+                            </p>
+                            <button class="edit">edit</button>
+                        </div>
+                        <div class="full-info">
+                            <div class="personal">
+                                <div class="p-side">
+                                    <p class="name">First Name</p>
+                                    <p class="the-name">The First Name</p>
+                                </div>
+                                <div class="p-side">
+                                    <p class="name">Last Name</p>
+                                    <p class="the-name">The Last Name</p>
+                                </div>
+                                <div class="p-side">
+                                    <p class="name">Date of Birth</p>
+                                    <p class="the-name">The Date of Birth</p>
+                                </div>
+                            </div>
+                            <div class="personal details">
+                                <div class="p-side">
+                                    <p class="name">Email Address</p>
+                                    <p class="the-name">culaaq@gmail.com</p>
+                                </div>
+                                <div class="p-side">
+                                    <p class="name">Phone Number</p>
+                                    <p class="the-name">+918898989898</p>
+                                </div>
+                                <div class="p-side">
+                                    <p class="name">User Role</p>
+                                    <p class="the-name">Staff</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <button class="submit">Submit</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <script>
+        const navItems = document.querySelectorAll('.home[data-target]');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', function () {
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+
+                contentSections.forEach(section => section.classList.remove('active'));
+
+                const targetId = this.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+    <script>
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="listing.js"></script>
+    <script type="module" src="cart.js"></script>
+    <script type="module" src="fetching.js"></script>
+    <script type="module" src="order.js"></script>
+    <script type="module" src="statistics.js"></script>
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="refresh.js"></script>
+    <script type="module" src="profile.js"></script>
+
+    <script src="search.js"></script>
+</body>
+
+</html>

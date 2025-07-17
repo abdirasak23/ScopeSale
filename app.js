@@ -141,7 +141,7 @@ class AuthManager {
             
             if (isAuth) {
                 // User is authenticated, redirect to dashboard
-                this.redirectTo('Onboarding/');
+                this.redirectTo('Dashboard/');
             } else {
                 const isReg = await this.isRegistered();
                 
@@ -342,51 +342,56 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // Smooth scroll navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
-    
     // Get all navigation links
     const navLinks = document.querySelectorAll('.navs ul a');
-    
     // Add click event listeners to navigation links
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent default anchor behavior
-            
-            const linkText = this.querySelector('li').textContent.trim().toLowerCase();
-            let targetSection = null;
-            
-            // Map navigation links to their corresponding sections
-            switch(linkText) {
-                case 'home':
-                    targetSection = document.querySelector('.main');
-                    break;
-                case 'features':
-                    targetSection = document.querySelector('.features');
-                    break;
-                case 'about us':
-                    targetSection = document.querySelector('.about');
-                    break;
-                case 'contact us':
-                    targetSection = document.querySelector('.footer');
-                    break;
-            }
-            
-            // Smooth scroll to the target section
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+        const linkText = link.querySelector('li') ? link.querySelector('li').textContent.trim().toLowerCase() : '';
+        // Only apply smooth scroll for Home, Features, About Us
+        if (['home', 'features', 'about us'].includes(linkText)) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default anchor behavior
+                let targetSection = null;
+                switch(linkText) {
+                    case 'home':
+                        targetSection = document.querySelector('.main');
+                        break;
+                    case 'features':
+                        targetSection = document.querySelector('.features');
+                        break;
+                    case 'about us':
+                        targetSection = document.querySelector('.about');
+                        break;
+                }
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        }
+        // Do NOT override Contact Us link, let it work as a normal link
     });
-    
+
+    // Also handle the separate Contact Us <li> if it's not inside <a>
+    const contactLi = Array.from(document.querySelectorAll('.navs ul li')).find(li => 
+        li.textContent.trim().toLowerCase() === 'contact us'
+    );
+    if (contactLi && contactLi.querySelector('a')) {
+        // Let the <a href="Contacts/">Contact Us</a> work normally, no smooth scroll
+        contactLi.querySelector('a').addEventListener('click', function(e) {
+            // No preventDefault, allow normal navigation
+        });
+    }
+
     // Optional: Add active navigation highlighting based on scroll position
     function updateActiveNavigation() {
         const sections = [
             { element: document.querySelector('.main'), navText: 'home' },
             { element: document.querySelector('.features'), navText: 'features' },
             { element: document.querySelector('.about'), navText: 'about us' },
-            { element: document.querySelector('.footer'), navText: 'contact us' }
+            // { element: document.querySelector('.footer'), navText: 'contact us' }
         ];
         
         const scrollPosition = window.scrollY + 100; // Offset for better detection
@@ -470,3 +475,34 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Show/hide Dashboard button based on authentication status
+    const dashboardBtn = document.querySelector('.dashboard-sec');
+    let isLoggedIn = false;
+
+    // Use Supabase if available
+    if (window.supabase) {
+        const SUPABASE_URL = 'https://jvcrkjkhmglgrwkadzxw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2Y3JramtobWdsZ3J3a2Fkenh3Iiwicm9zZSI6ImFub24iLCJpYXQiOjE3NTE2OTQwOTgsImV4cCI6MjA2NzI3MDA5OH0.4uGTPJg2Nbl8QvGy6UhlBJlJ4lUtMl9f6vTJ_jf8z3o';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            isLoggedIn = !!(session && session.user);
+        } catch (error) {
+            isLoggedIn = false;
+        }
+    } else {
+        // Fallback: check local/session storage
+        isLoggedIn = !!(
+            localStorage.getItem('authToken') ||
+            sessionStorage.getItem('authToken') ||
+            localStorage.getItem('userId') ||
+            sessionStorage.getItem('userId')
+        );
+    }
+
+    if (dashboardBtn) {
+        dashboardBtn.style.display = isLoggedIn ? 'inline-block' : 'none';
+    }
+});

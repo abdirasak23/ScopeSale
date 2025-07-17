@@ -1136,24 +1136,17 @@ ul a:hover{
 
     
 
-    .navs{
-        /* background-color: grey; */
-    }
+    
 
 
-    .logo{
-        /* background-color: green; */
-    }
+    
 
     .navs ul{
         display: none;
     }
 
 
-    .content{
-        /* background-color: green; */
-        
-    }
+    
 
     .small-info{
         width: 250px;
@@ -1351,11 +1344,6 @@ ul a:hover{
         overflow-x: hidden;
     }
 
-    
-
-    .navs{
-        /* background-color: green; */
-    }
 
     .navs ul{
         display: none;
@@ -1572,4 +1560,35 @@ ul a:hover{
     
 }
 
+}
+
+
+
+.dashboard-sec{
+    height: 30px;
+    width: 150px;
+    position: absolute;
+    right: 40px;
+    top: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #4d9ef6;
+    color: rgb(161, 181, 249);
+    display: none;
+    cursor: pointer;
+    transition: 
+        background 0.3s,
+        color 0.3s,
+        box-shadow 0.3s,
+        border-color 0.3s;
+    outline: none;
+}
+
+.dashboard-sec:hover,
+.dashboard-sec:focus {
+    background: linear-gradient(90deg, #4d9ef6 0%, #007BFF 100%);
+    color: #fff;
+    border-color: #007BFF;
+    box-shadow: 0 4px 16px rgba(77, 158, 246, 0.25), 0 0 0 2px #007BFF;
+    border: none;
 }
