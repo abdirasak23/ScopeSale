@@ -131,17 +131,18 @@ class ProductManager {
         }
     }
 
-    // Get form data
+    // Get form data (dynamically get category value from the select)
     getFormData() {
         return {
             name: document.getElementById('productName').value.trim(),
             price: document.getElementById('price').value,
+            // Always get the selected value from the HTML select
             category: document.getElementById('category').value,
             stock: document.getElementById('stock').value
         };
     }
 
-    // Validate form data
+    // Validate form data (allow any category present in the select options)
     validateFormData(data) {
         if (!data.name) {
             this.showError('Product name is required');
@@ -151,8 +152,13 @@ class ProductManager {
             this.showError('Valid price is required');
             return false;
         }
-        if (!data.category) {
-            this.showError('Category is required');
+        // Dynamically get allowed categories from the select options
+        const categorySelect = document.getElementById('category');
+        const allowedCategories = Array.from(categorySelect.options)
+            .map(opt => opt.value)
+            .filter(val => val); // Exclude empty value
+        if (!allowedCategories.includes(data.category)) {
+            this.showError('Please select a valid category.');
             return false;
         }
         if (!data.stock || data.stock < 0) {

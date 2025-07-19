@@ -1,39 +1,39 @@
-.profile{
+.profile {
     position: absolute;
     bottom: 30px;
 }
 
-.profiles{
+.profiles {
     border: 1px solid black;
 }
 
 
-.left-slides{
+.left-slides {
     overflow: hidden;
     /* background-color: red; */
     overflow-y: hidden;
 }
 
 
-.content-section{
+.content-section {
     /* background-color: grey; */
     overflow: auto;
     height: 140%;
 }
 
-#orders-content{
+#orders-content {
     background-color: #008000;
     overflow-y: auto;
 }
 
-body{
+body {
     overflow: hidden;
 }
 
 
 
 
-.profile-section{
+.profile-section {
     /* background-color: grey; */
     height: 600px;
     width: 900px;
@@ -42,12 +42,12 @@ body{
 }
 
 
-.logout{
+.logout {
     color: red;
 }
 
 
-.profile-sect{
+.profile-sect {
     height: 140px;
     width: 800px;
     /* background-color: green; */
@@ -58,7 +58,7 @@ body{
 }
 
 
-.image-pro{
+.image-pro {
     height: 100px;
     width: 100px;
     background-color: grey;
@@ -72,7 +72,7 @@ body{
 
 
 
-.camera{
+.camera {
     height: 20px;
     width: 20px;
     /* background-color: green; */
@@ -84,7 +84,7 @@ body{
 }
 
 
-.person{
+.person {
     height: 100px;
     width: 500px;
     /* background-color: green; */
@@ -94,7 +94,7 @@ body{
 }
 
 
-.person h4{
+.person h4 {
     font-size: 22px;
     color: rgb(1, 1, 97);
     font-weight: 500;
@@ -103,19 +103,19 @@ body{
     bottom: 15px;
 }
 
-.person p{
+.person p {
     font-size: 16px;
     position: relative;
     bottom: 10px;
     height: 0px;
 }
 
-.address{
+.address {
     position: relative;
-    top:-5px;
+    top: -5px;
 }
 
-.personal-info{
+.personal-info {
     position: relative;
     height: 250px;
     width: 800px;
@@ -123,7 +123,7 @@ body{
     top: 60px;
 }
 
-.the-head{
+.the-head {
     /* background-color: grey; */
     height: 60px;
     font-size: 20px;
@@ -133,14 +133,14 @@ body{
 }
 
 
-.the-head p{
+.the-head p {
     position: relative;
     left: 20px;
     bottom: 5px;
     font-weight: 500;
 }
 
-.edit{
+.edit {
     height: 40px;
     width: 100px;
     background-color: transparent;
@@ -153,14 +153,14 @@ body{
 }
 
 
-.submit{
+.submit {
     height: 40px;
     width: 160px;
     background-color: rgb(31, 31, 143);
     position: relative;
-    
+
     cursor: pointer;
-    
+
     font-size: 16px;
     border: none;
     top: 70px;
@@ -168,7 +168,7 @@ body{
     display: none;
 }
 
-.edit{
+.edit {
     height: 40px;
     width: 100px;
     background-color: transparent;
@@ -181,7 +181,7 @@ body{
 }
 
 
-.personal{
+.personal {
     height: 70px;
     width: 700px;
     gap: 60px;
@@ -193,7 +193,7 @@ body{
     display: flex;
 }
 
-.p-side{
+.p-side {
     height: 60px;
     width: 150px;
     /* background-color: grey; */
@@ -204,22 +204,22 @@ body{
 }
 
 
-.p-side p{
+.p-side p {
     height: 0px;
     font-size: 18px;
 }
 
-.name{
+.name {
     position: relative;
     top: -10px;
     color: rgb(103, 103, 103);
 
 }
 
-.the-name{
+.the-name {
     position: relative;
     bottom: 3px;
-    
+
 }
 
 
@@ -228,13 +228,156 @@ width: 350px;
 } */
 
 
-.add h2{
+.add h2 {
     color: blue;
 }
 
 
-.image-pro img{
+.image-pro img {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
+
+.pro {
+    position: absolute;
+    top: 140px;
+}
+
+
+.cat-filter {
+    background-color: green;
+    position: absolute;
+    left: 260px;
+    top: 80px;
+}
+
+
+.business-side {
+    position: absolute;
+    left: 260px;
+}
+
+
+
+.business-navigation {
+    height: 60px;
+    width: 800px;
+    background-color: rgba(105, 117, 165, 0.187);
+    position: relative;
+    top: 60px;
+    display: flex;
+    gap: 20px;
+}
+
+.bus-nav {
+    height: 40px;
+    width: 120px;
+    background-color: rgba(41, 47, 201, 0.648);
+    position: relative;
+    left: 10px;
+    border: 1px solid #000;
+    top: 10px;
+    text-align: center;
+}
+
+.nav-name {
+    font-size: 20px;
+    position: relative;
+    bottom: 12px;
+    color: white;
+}
+
+
+.staffs {
+    height: 200px;
+    width: 800px;
+    /* background-color: rgba(128, 128, 128, 0.306); */
+    position: relative;
+    top: 80px;
+}
+
+
+.staff-head {
+    height: 50px;
+    width: 800px;
+    background-color: rgba(119, 121, 123, 0.174);
+    display: flex;
+
+}
+
+
+.staff-name{
+    font-size: 20px;
+    position: relative;
+    bottom: 10px;
+    left: 10px;
+    /* background-color: green; */
+    max-width: 120px;
+    font-weight: 500;
+}
+
+
+.staff-full{
+    height: 50px;
+    width: 800px;
+    /* background-color: green; */
+    position: relative;
+    top: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.the-staff-name{
+    position: relative;
+    left: 5px;
+    font-size: 18px;
+    bottom: 3px;
+    /* background-color: red; */
+    max-width: 230px;
+}
+
+
+.email-staff{
+    position: relative;
+    left: 160px;
+}
+
+
+.the-staff-email{
+    position: relative;
+    left: 45px;
+}
+
+.action{
+    height: 40px;
+    width: 100px;
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    outline: none;
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.action:hover,
+.action:focus {
+    background-color: #b30000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    outline: none;
+}
+
+
+
+.business-pro{
+    position: absolute;
+    left: -5px;
+    top: 320px;
+    display: flex;
+    max-width: 900px;
+}
+

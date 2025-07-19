@@ -20,9 +20,15 @@ function debounce(func, wait) {
     };
 }
 
-// Search products in database
+// Search products in database (only for current business)
 async function searchProducts(query) {
     if (!query.trim()) {
+        recommendations.classList.remove('show');
+        return;
+    }
+
+    // Wait for productFetcher to be ready and initialized
+    if (!window.productFetcher || !productFetcher.userBusinessId) {
         recommendations.classList.remove('show');
         return;
     }
@@ -31,6 +37,7 @@ async function searchProducts(query) {
         const { data, error } = await supabaseClient
             .from('products')
             .select('*')
+            .eq('business_id', productFetcher.userBusinessId) // Only this business's products
             .ilike('name', `%${query}%`)
             .limit(10)
             .order('name');
@@ -41,13 +48,13 @@ async function searchProducts(query) {
         }
 
         showRecommendations(data, query);
-        
+
     } catch (error) {
         console.error('Search error:', error);
     }
 }
 
-// Show recommendations based on search results
+// Show recommendations based on search results (only for current business)
 function showRecommendations(products, query) {
     if (!products || products.length === 0) {
         // Show "no results" message
@@ -61,11 +68,16 @@ function showRecommendations(products, query) {
         return;
     }
 
+    // Filter again by business_id in case (defensive)
+    const filteredProducts = products.filter(
+        p => p.business_id === productFetcher.userBusinessId
+    );
+
     // Clear previous recommendations
     recommendations.innerHTML = '';
 
     // Group products by category
-    const groupedProducts = products.reduce((acc, product) => {
+    const groupedProducts = filteredProducts.reduce((acc, product) => {
         if (!acc[product.category]) {
             acc[product.category] = [];
         }
@@ -109,7 +121,7 @@ function displayProductInContainer(product) {
 
     // Update or create the product display
     productContainer.innerHTML = `
-        <div class="product">
+        <div class="product" data-id="${product.id}">
             <div class="product-info">
                 <div class="info-left">
                     <p class="thename">${product.name}</p>
@@ -124,6 +136,15 @@ function displayProductInContainer(product) {
             </div>
         </div>
     `;
+
+    // Attach add to cart event like fetching.js
+    const productDiv = productContainer.querySelector('.product');
+    if (productDiv && window.productFetcher) {
+        productDiv.addEventListener('click', (event) => {
+            const productId = parseInt(productDiv.dataset.id);
+            window.productFetcher.handleAddToCart(productId, event);
+        });
+    }
 
     // Switch to product tab to show the product
     const productTab = document.querySelector('.home[data-target="product-content"]');
@@ -155,7 +176,7 @@ async function loadAllProducts() {
         if (data && data.length > 0) {
             displayProductInContainer(data[0]); // Show the most recent product
         }
-        
+
     } catch (error) {
         console.error('Error loading products:', error);
     }
@@ -196,7 +217,7 @@ const getRecommendationItems = () => recommendations.querySelectorAll('.recommen
 
 searchInput.addEventListener('keydown', (e) => {
     const items = getRecommendationItems();
-    
+
     if (e.key === 'ArrowDown') {
         e.preventDefault();
         selectedIndex = Math.min(selectedIndex + 1, items.length - 1);

@@ -898,3 +898,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 200);
 });
+
+// Add this after DOMContentLoaded or after productFetcher is initialized
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait for productFetcher to be ready
+    const waitForFetcher = setInterval(() => {
+        if (window.productFetcher && productFetcher.userBusinessId) {
+            const categorySelect = document.getElementById('category-filter');
+            if (categorySelect) {
+                categorySelect.addEventListener('change', async function () {
+                    const selectedCategory = this.value;
+                    if (!selectedCategory) {
+                        // If "Select a category..." is chosen, show all products
+                        await productFetcher.fetchAllProducts();
+                    } else {
+                        // Fetch products by selected category
+                        await productFetcher.fetchProductsByCategory(selectedCategory);
+                    }
+                });
+            }
+            clearInterval(waitForFetcher);
+        }
+    }, 200);
+});
