@@ -86,7 +86,7 @@ body {
 
 .person {
     height: 100px;
-    width: 500px;
+    width: 250px;
     /* background-color: green; */
     left: 60px;
     top: 20px;
@@ -255,9 +255,19 @@ width: 350px;
 
 .business-side {
     position: absolute;
-    left: 260px;
+    left: 240px;
+    overflow-y: auto;
+    /* background-color: green; */
+    height: 100%;
+    width: 850px;
+    overflow-x: hidden;
 }
 
+
+.staff-info{
+    overflow-y: auto;
+    height: 100%;
+}
 
 
 .business-navigation {
@@ -273,19 +283,28 @@ width: 350px;
 .bus-nav {
     height: 40px;
     width: 120px;
-    background-color: rgba(41, 47, 201, 0.648);
+    background-color: transparent;
     position: relative;
     left: 10px;
+    border-radius: 5px;
+    color: #000;
     border: 1px solid #000;
     top: 10px;
     text-align: center;
 }
 
+
+.bus-nav.active {
+    background-color: rgba(41, 47, 201, 0.648);
+    color: rgb(253, 253, 253);
+}
+
+
 .nav-name {
     font-size: 20px;
     position: relative;
     bottom: 12px;
-    color: white;
+    /* color: white; */
 }
 
 
@@ -340,13 +359,14 @@ width: 350px;
 
 .email-staff{
     position: relative;
-    left: 160px;
+    left: 80px;
 }
 
 
 .the-staff-email{
-    position: relative;
-    left: 45px;
+    position: absolute;
+    left: 190px;
+    top: -3px;
 }
 
 .action{
@@ -364,6 +384,37 @@ width: 350px;
     cursor: pointer;
 }
 
+.add-new{
+    height: 40px;
+    width: 100px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 16px;
+    background-color: rgb(0, 42, 255);
+    color: white;
+    border: none;
+    outline: none;
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+
+.staff-head .add-new{
+    height: 40px;
+    width: 100px;
+    position: absolute;
+    /* right: 20px; */
+    top: 0px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    outline: none;
+    /* transition: background 0.2s, box-shadow 0.2s; */
+    cursor: pointer;
+}
+
 .action:hover,
 .action:focus {
     background-color: #b30000;
@@ -373,6 +424,10 @@ width: 350px;
 
 
 
+.staff-name{
+    cursor: pointer;
+}
+
 .business-pro{
     position: absolute;
     left: -5px;
@@ -381,3 +436,147 @@ width: 350px;
     max-width: 900px;
 }
 
+.business-product{
+    /* background-color: grey; */
+    height: 400px;
+    width: 850px;
+    position: relative;
+    top: 80px;
+    
+}
+
+
+.business-product-cont{
+    height: 80px;
+    margin-top: 10px;
+    width: 600px;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+}
+
+
+.product-details-bus{
+    height: 80px;
+    width: 240px;
+    /* background-color: gold; */
+    overflow: hidden;
+}
+
+
+.bus-pro-name{
+    font-size: 20px;
+    font-weight: 500;
+    position: relative;
+    left: 10px;
+    bottom: 4px;
+}
+
+
+
+.bus-pro-category{
+    position: relative;
+    left: 10px;
+    font-size: 18px;
+    bottom: 20px;
+    color: rgb(93, 93, 93);
+}
+
+
+.stock-info{
+    font-size: 18px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: green;
+}
+
+
+.inc-dec{
+    height: 80px;
+    width:180px;
+    /* background-color: green; */
+    position: abs;
+    left: 100px;
+    display: flex;
+    gap: 10px;
+
+}
+
+
+.inc{
+    height: 40px;
+    width: 80px;
+    background-color: rgb(239, 239, 239);
+    position: relative;
+    top: 20px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.589);
+}
+
+.inc i{
+    font-size: 20px;
+    top: 10px;
+    position: relative;
+}
+
+
+.bus-nav{
+    cursor: pointer;
+}
+
+
+.add-new{
+    position: absolute;
+    background-color: blue;
+}
+
+
+.the-staff-role{
+    /* background-color: green; */
+
+}
+
+
+.email-staff{
+    /* background-color: red; */
+    position: relative;
+    left: 140px;
+}
+
+
+.role-staff{
+    /* background-color: yellow; */
+    position: relative;
+    left: 335px;
+}
+
+
+.the-staff-role{
+    position: absolute;
+    left: 220px;
+    
+}
+
+
+.much-details{
+    /* background-color: green; */
+    width: 250px;
+    
+}
+
+
+.business-num{
+    position: relative;
+    top: 50px;
+    height: 0px;
+    margin-top: 20px;
+}
+
+
+.bus-em{
+    position: relative;
+    
+    height: 0px;
+}
