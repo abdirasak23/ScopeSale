@@ -163,7 +163,7 @@ class ProductFetcher {
             // Query products table filtered by business_id
             const { data, error } = await supabaseClient
                 .from('products')
-                .select('*')
+                .select('*, unit_amount, unit_type')
                 .eq('business_id', this.userBusinessId)
                 .order('created_at', { ascending: false });
 
@@ -215,7 +215,7 @@ class ProductFetcher {
 
             let query = supabaseClient
                 .from('products')
-                .select('*')
+                .select('*, unit_amount, unit_type')
                 .eq('business_id', this.userBusinessId)
                 .order('created_at', { ascending: false });
 
@@ -269,7 +269,7 @@ class ProductFetcher {
 
             const { data, error } = await supabaseClient
                 .from('products')
-                .select('*')
+                .select('*, unit_amount, unit_type')
                 .eq('business_id', this.userBusinessId)
                 .or(`name.ilike.%${searchQuery}%,category.ilike.%${searchQuery}%`)
                 .order('created_at', { ascending: false });
@@ -317,7 +317,7 @@ class ProductFetcher {
 
             const { data, error } = await supabaseClient
                 .from('products')
-                .select('*')
+                .select('*, unit_amount, unit_type')
                 .eq('id', productId)
                 .eq('business_id', this.userBusinessId)
                 .single();
@@ -334,6 +334,36 @@ class ProductFetcher {
             console.error('❌ Product fetch error:', error);
             return null;
         }
+    }
+
+    formatUnitInfo(product) {
+        const unitAmount = product.unit_amount || 0;
+        const unitType = product.unit_type || '';
+        const stock = product.stock || 0;
+        
+        // Create unit display string with colored spans
+        let unitDisplay = '';
+        
+        if (unitAmount > 0 && unitType) {
+            // Both amount and type available
+            unitDisplay = `<span class="unit-amounts">${unitAmount}</span> <span class="unit-types">${unitType}</span>`;
+        } else if (unitAmount > 0 && !unitType) {
+            // Only amount available
+            unitDisplay = `<span class="unit-amounts">${unitAmount}</span> <span class="unit-types">units</span>`;
+        } else if (!unitAmount && unitType) {
+            // Only type available (no amount)
+            unitDisplay = `<span class="unit-types">${unitType}</span>`;
+        } else {
+            // Neither available
+            unitDisplay = '<span class="no-unit-info">No unit info</span>';
+        }
+        
+        // Create stock status with appropriate styling
+        const stockStatus = stock > 0 ? 
+            '<span class="stock-in">In Stock</span>' : 
+            '<span class="stock-out">Out of Stock</span>';
+        
+        return `${unitDisplay} • ${stockStatus}`;
     }
 
     // Display products in existing HTML structure
@@ -370,6 +400,8 @@ class ProductFetcher {
             if (product.stock <= 0) productClass += ' out-of-stock';
             
             productDiv.className = productClass;
+
+            const unitInfo = this.formatUnitInfo(product);
             
             productDiv.innerHTML = `
                 <div class="product-info">
@@ -378,8 +410,8 @@ class ProductFetcher {
                         <p class="category">${product.category}</p>
                     </div>
                     <div class="info-right">
-                        <p class="price">${product.price} /-</p>
-                        <p class="stock ${product.stock <= 0 ? 'out-of-stock' : ''}">${product.stock > 0 ? 'In Stock' : 'Out of Stock'}</p>
+                        <p class="price">$${product.price}</p>
+                        <p class="stock units-data ${product.stock <= 0 ? 'out-of-stock' : ''}">${unitInfo}</p>
                     </div>
                 </div>
                 ${isInCart ? '<div class="cart-indicator" style="position:absolute; right:100px;">✓ In Cart</div>' : ''}

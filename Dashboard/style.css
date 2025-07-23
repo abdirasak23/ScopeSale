@@ -295,6 +295,9 @@ body {
     position: relative;
     bottom: 38px;
     color: green;
+    /* background-color: red; */
+    width: 150px;
+    right: 90px;
 }
 
 .add {
@@ -314,11 +317,17 @@ body {
     position: relative;
     left: 60px;
 }
+#unit-amount {
+    position: relative;
+    left: 60px;
+    display: none;
+}
 
 .submit-btn {
-    position: relative;
+    position: absolute;
     left: 150px;
-    bottom: 10px;
+    bottom: -60px;
+    /* width: 200px !important; */
 }
 
 .lists {
@@ -413,7 +422,7 @@ body {
 }
 
 .submit-btn {
-    width: 100%;
+    width: 300px;
     padding: 16px;
     background: linear-gradient(45deg, #667eea, #2c1797);
     color: white;
@@ -940,7 +949,10 @@ body {
 .pro{
     position: absolute;
     left: 250px;
+    /* background-color: green; */
 }
+
+
 
 .chart-pay{
     display: flex;

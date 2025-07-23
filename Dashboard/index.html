@@ -13,6 +13,7 @@
 
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashstyle.css">
     <link rel="stylesheet" href="dash.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
@@ -83,6 +84,10 @@
                     <i class='bxr  bx-list-square'></i>
                     <p>List</p>
                 </div>
+                <!-- <div class="home" id="below" data-target="inventory-content">
+                    <i class='bxr  bx-list-square'></i>
+                    <p>Inventory</p>
+                </div> -->
 
                 <div class="profile">
                     <div class="home logout" id="below" data-target="black-content">
@@ -284,7 +289,7 @@
                             </div>
                             <div class="info-right">
                                 <p class="price">434 /-</p>
-                                <p class="stock">In Stock</p>
+                                <p class="stock units-data">500 grams • In Stock</p>
                             </div>
                         </div>
                     </div>
@@ -376,6 +381,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="content-section" id="black-content">
                 <div class="add">
                     <h2 class="form-title">Add New Product</h2>
@@ -437,11 +443,30 @@
                             <input type="number" class="form-input" id="stock" placeholder="Enter stock quantity..."
                                 min="0" required>
                         </div>
+                        <div class="form-group">
+                            <label class="form-hint">Unit Type</label>
+                            <select class="form-select" id="unit" required>
+                                <option value="">Select a unit type...</option>
+                                <option value="box">Box</option>
+                                <option value="piece">Piece</option>
+                                <option value="gram">Gram</option>
+                                <option value="kilogram">Kilogram</option>
+                                <option value="litre">Litre</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group" id="unit-amount">
+                            <label class="form-hint">Unit Amount</label>
+                            <input type="number" class="form-input" id="unit-amounts" placeholder="0.00" step="0.01"
+                                min="0" required>
+                        </div>
 
                         <button type="submit" class="submit-btn">
                             Submit Product
                         </button>
                     </form>
+
                 </div>
             </div>
             <div class="content-section" id="cart-content">
@@ -482,6 +507,92 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <div class="content-section" id="inventory-content">
+                <div class="head-data">
+                    <button class="edit-product">Edit Product</button>
+                </div>
+                <div class="the-inventory">
+                    <table class="orders inventory">
+                        <thead>
+                            <tr class="row header">
+                                <th class="column one">
+                                    <input type="checkbox" name="check" value="yes">
+                                    <span class="head">ID</span>
+                                </th>
+                                <th class="column two">
+                                    <span class="head">Product Name</span>
+                                </th>
+                                <th class="column three">
+                                    <span class="head">Total Price</span>
+                                </th>
+                                <th class="column four">
+                                    <span class="head">Quantity</span>
+                                </th>
+                                <th class="column five">
+                                    <span class="head">Category</span>
+                                </th>
+                                <th class="column six">
+                                    <span class="head">Saled</span>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr class="row data">
+                                <td class="column one">
+                                    <input type="checkbox" name="check" value="yes">
+                                    <span class="data-info">PRO002</span>
+                                </td>
+                                <td class="column two">
+                                    <span class="data-info">Iphone 13</span>
+                                </td>
+                                <td class="column three">
+                                    <span class="data-info">$400</span>
+                                </td>
+                                <td class="column four">
+                                    <span class="data-info">20</span>
+                                </td>
+                                <td class="column five">
+                                    <span class="data-info">Electronics</span>
+                                </td>
+                                <td class="column six">
+                                    <a href="">
+                                        <span class="data-info">49</span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            <tr class="row data">
+                                <td class="column one">
+                                    <input type="checkbox" name="check" value="yes">
+                                    <span class="data-info">PRO002</span>
+                                </td>
+                                <td class="column two">
+                                    <span class="data-info">Iphone 13</span>
+                                </td>
+                                <td class="column three">
+                                    <span class="data-info">$400</span>
+                                </td>
+                                <td class="column four">
+                                    <span class="data-info">20</span>
+                                </td>
+                                <td class="column five">
+                                    <span class="data-info">Electronics</span>
+                                </td>
+                                <td class="column six">
+                                    <a href="">
+                                        <span class="data-info">49</span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+
 
             <div class="content-section" id="profile-content">
                 <div class="profile-section">
@@ -659,7 +770,7 @@
 
             </div>
 
-            
+
         </div>
     </div>
     </div>
@@ -700,6 +811,7 @@
     <script type="module" src="profile.js"></script>
     <script type="module" src="business.js"></script>
     <script type="module" src="reciept.js"></script>
+    <script type="module" src="inventory.js"></script>
 
     <script src="search.js"></script>
 </body>

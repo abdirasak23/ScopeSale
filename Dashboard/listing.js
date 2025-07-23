@@ -16,7 +16,35 @@ class ProductManager {
     async init() {
         await this.getCurrentUserBusiness();
         this.setupEventListeners();
+        this.setupUnitTypeHandler();
         this.loadProducts();
+    }
+
+    // Setup unit type change handler
+    setupUnitTypeHandler() {
+        const unitSelect = document.getElementById('unit');
+        const unitAmountDiv = document.getElementById('unit-amount');
+        
+        if (unitSelect && unitAmountDiv) {
+            // Initially hide unit amount
+            unitAmountDiv.style.display = 'none';
+            
+            unitSelect.addEventListener('change', (e) => {
+                const selectedUnit = e.target.value;
+                const weightVolumeUnits = ['kilogram', 'gram', 'litre'];
+                
+                if (weightVolumeUnits.includes(selectedUnit)) {
+                    unitAmountDiv.style.display = 'block';
+                    // Make unit amount required when visible
+                    document.getElementById('unit-amounts').required = true;
+                } else {
+                    unitAmountDiv.style.display = 'none';
+                    // Remove required attribute and clear value when hidden
+                    document.getElementById('unit-amounts').required = false;
+                    document.getElementById('unit-amounts').value = '';
+                }
+            });
+        }
     }
 
     // Get current user's business ID
@@ -103,18 +131,25 @@ class ProductManager {
         }
 
         try {
+            // Prepare product data
+            const productData = {
+                name: formData.name,
+                price: parseFloat(formData.price),
+                category: formData.category,
+                stock: parseInt(formData.stock),
+                unit_type: formData.unitType,
+                business_id: this.currentBusinessId,
+                created_at: new Date().toISOString()
+            };
+
+            // Add unit amount if applicable
+            if (formData.unitAmount !== null) {
+                productData.unit_amount = parseFloat(formData.unitAmount);
+            }
+
             const { data, error } = await supabaseClient
                 .from('products')
-                .insert([
-                    {
-                        name: formData.name,
-                        price: parseFloat(formData.price),
-                        category: formData.category,
-                        stock: parseInt(formData.stock),
-                        business_id: this.currentBusinessId, // Add business_id
-                        created_at: new Date().toISOString()
-                    }
-                ])
+                .insert([productData])
                 .select();
 
             if (error) {
@@ -131,18 +166,28 @@ class ProductManager {
         }
     }
 
-    // Get form data (dynamically get category value from the select)
+    // Get form data (including unit type and unit amount)
     getFormData() {
+        const unitType = document.getElementById('unit').value;
+        const unitAmountInput = document.getElementById('unit-amounts');
+        const weightVolumeUnits = ['kilogram', 'gram', 'litre'];
+        
+        let unitAmount = null;
+        if (weightVolumeUnits.includes(unitType) && unitAmountInput.value) {
+            unitAmount = unitAmountInput.value;
+        }
+
         return {
             name: document.getElementById('productName').value.trim(),
             price: document.getElementById('price').value,
-            // Always get the selected value from the HTML select
             category: document.getElementById('category').value,
-            stock: document.getElementById('stock').value
+            stock: document.getElementById('stock').value,
+            unitType: unitType,
+            unitAmount: unitAmount
         };
     }
 
-    // Validate form data (allow any category present in the select options)
+    // Validate form data (including unit validation)
     validateFormData(data) {
         if (!data.name) {
             this.showError('Product name is required');
@@ -152,6 +197,7 @@ class ProductManager {
             this.showError('Valid price is required');
             return false;
         }
+        
         // Dynamically get allowed categories from the select options
         const categorySelect = document.getElementById('category');
         const allowedCategories = Array.from(categorySelect.options)
@@ -161,10 +207,31 @@ class ProductManager {
             this.showError('Please select a valid category.');
             return false;
         }
+        
         if (!data.stock || data.stock < 0) {
             this.showError('Valid stock quantity is required');
             return false;
         }
+        
+        // Validate unit type
+        const unitSelect = document.getElementById('unit');
+        const allowedUnits = Array.from(unitSelect.options)
+            .map(opt => opt.value)
+            .filter(val => val); // Exclude empty value
+        if (!allowedUnits.includes(data.unitType)) {
+            this.showError('Please select a valid unit type.');
+            return false;
+        }
+        
+        // Validate unit amount for weight/volume units
+        const weightVolumeUnits = ['kilogram', 'gram', 'litre'];
+        if (weightVolumeUnits.includes(data.unitType)) {
+            if (!data.unitAmount || data.unitAmount <= 0) {
+                this.showError('Unit amount is required for weight/volume units');
+                return false;
+            }
+        }
+        
         return true;
     }
 
@@ -194,7 +261,7 @@ class ProductManager {
         }
     }
 
-    // Display products in the UI
+    // Display products in the UI (including unit information)
     displayProducts(products) {
         const productsList = document.getElementById('productsList');
         if (!productsList) return;
@@ -204,29 +271,40 @@ class ProductManager {
             return;
         }
 
-        productsList.innerHTML = products.map(product => `
-            <div class="product-item" data-id="${product.id}">
-                <div class="product-name">${product.name}</div>
-                <div class="product-details">
-                    <div class="product-detail">
-                        <strong>Price:</strong> $${product.price.toFixed(2)}
+        productsList.innerHTML = products.map(product => {
+            // Format unit display
+            let unitDisplay = product.unit_type || 'N/A';
+            if (product.unit_amount && ['kilogram', 'gram', 'litre'].includes(product.unit_type)) {
+                unitDisplay = `${product.unit_amount} ${product.unit_type}`;
+            }
+
+            return `
+                <div class="product-item" data-id="${product.id}">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-details">
+                        <div class="product-detail">
+                            <strong>Price:</strong> $${product.price.toFixed(2)}
+                        </div>
+                        <div class="product-detail">
+                            <strong>Category:</strong> ${product.category}
+                        </div>
+                        <div class="product-detail">
+                            <strong>Stock:</strong> ${product.stock}
+                        </div>
+                        <div class="product-detail">
+                            <strong>Unit:</strong> ${unitDisplay}
+                        </div>
+                        <div class="product-detail">
+                            <strong>Added:</strong> ${new Date(product.created_at).toLocaleDateString()}
+                        </div>
                     </div>
-                    <div class="product-detail">
-                        <strong>Category:</strong> ${product.category}
-                    </div>
-                    <div class="product-detail">
-                        <strong>Stock:</strong> ${product.stock}
-                    </div>
-                    <div class="product-detail">
-                        <strong>Added:</strong> ${new Date(product.created_at).toLocaleDateString()}
+                    <div class="product-actions">
+                        <button onclick="productManager.editProduct(${product.id})" class="edit-btn">Edit</button>
+                        <button onclick="productManager.deleteProduct(${product.id})" class="delete-btn">Delete</button>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button onclick="productManager.editProduct(${product.id})" class="edit-btn">Edit</button>
-                    <button onclick="productManager.deleteProduct(${product.id})" class="delete-btn">Delete</button>
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     // Edit product
@@ -248,6 +326,22 @@ class ProductManager {
             document.getElementById('price').value = data.price;
             document.getElementById('category').value = data.category;
             document.getElementById('stock').value = data.stock;
+            document.getElementById('unit').value = data.unit_type || '';
+            
+            // Handle unit amount
+            const unitAmountDiv = document.getElementById('unit-amount');
+            const unitAmountInput = document.getElementById('unit-amounts');
+            const weightVolumeUnits = ['kilogram', 'gram', 'litre'];
+            
+            if (data.unit_type && weightVolumeUnits.includes(data.unit_type)) {
+                unitAmountDiv.style.display = 'block';
+                unitAmountInput.required = true;
+                unitAmountInput.value = data.unit_amount || '';
+            } else {
+                unitAmountDiv.style.display = 'none';
+                unitAmountInput.required = false;
+                unitAmountInput.value = '';
+            }
 
             // Change form to edit mode
             this.setEditMode(productId);
@@ -291,15 +385,26 @@ class ProductManager {
         }
 
         try {
+            // Prepare update data
+            const updateData = {
+                name: formData.name,
+                price: parseFloat(formData.price),
+                category: formData.category,
+                stock: parseInt(formData.stock),
+                unit_type: formData.unitType,
+                updated_at: new Date().toISOString()
+            };
+
+            // Add unit amount if applicable, otherwise set to null
+            if (formData.unitAmount !== null) {
+                updateData.unit_amount = parseFloat(formData.unitAmount);
+            } else {
+                updateData.unit_amount = null;
+            }
+
             const { data, error } = await supabaseClient
                 .from('products')
-                .update({
-                    name: formData.name,
-                    price: parseFloat(formData.price),
-                    category: formData.category,
-                    stock: parseInt(formData.stock),
-                    updated_at: new Date().toISOString()
-                })
+                .update(updateData)
                 .eq('id', productId)
                 .eq('business_id', this.currentBusinessId) // Ensure user can only update their own products
                 .select();
@@ -407,10 +512,16 @@ class ProductManager {
     resetForm() {
         const form = document.getElementById('productForm');
         const submitBtn = form.querySelector('.submit-btn');
+        const unitAmountDiv = document.getElementById('unit-amount');
+        const unitAmountInput = document.getElementById('unit-amounts');
 
         form.reset();
         delete form.dataset.editId;
         submitBtn.textContent = 'Submit Product';
+
+        // Reset unit amount visibility and requirement
+        unitAmountDiv.style.display = 'none';
+        unitAmountInput.required = false;
 
         // Remove previous listeners before adding
         if (this.handleUpdateProductBound) {
@@ -584,74 +695,61 @@ navItems.forEach(item => {
 /*
 Updated Database Schema for Supabase:
 
--- Products table with business_id foreign key
+-- Products table with business_id foreign key and unit fields
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     category VARCHAR(100) NOT NULL,
     stock INTEGER NOT NULL DEFAULT 0,
-    business_id INTEGER NOT NULL REFERENCES businesses(id) ON DELETE CASCADE,
+    unit_type VARCHAR(50),
+    unit_amount DECIMAL(10, 2),
+    business_id INTEGER NOT NULL REFERENCES bussiness(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Businesses table (if not exists)
-CREATE TABLE businesses (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
+-- If you need to add the new columns to existing table:
+ALTER TABLE products ADD COLUMN unit_type VARCHAR(50);
+ALTER TABLE products ADD COLUMN unit_amount DECIMAL(10, 2);
 
 -- Create indexes for better performance
 CREATE INDEX idx_products_business_id ON products(business_id);
-CREATE INDEX idx_businesses_user_id ON businesses(user_id);
+CREATE INDEX idx_products_unit_type ON products(unit_type);
 
--- Enable Row Level Security (RLS)
+-- Enable Row Level Security (RLS) - if not already enabled
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
-ALTER TABLE businesses ENABLE ROW LEVEL SECURITY;
 
--- RLS Policies for products table
+-- RLS Policies for products table (if not already created)
 CREATE POLICY "Users can view products from their business" 
     ON products FOR SELECT 
     USING (business_id IN (
-        SELECT id FROM businesses WHERE user_id = auth.uid()
+        SELECT id FROM bussiness WHERE user_id = auth.uid()
+        UNION
+        SELECT id FROM bussiness WHERE staff_emails @> ARRAY[auth.email()]
     ));
 
 CREATE POLICY "Users can insert products to their business" 
     ON products FOR INSERT 
     WITH CHECK (business_id IN (
-        SELECT id FROM businesses WHERE user_id = auth.uid()
+        SELECT id FROM bussiness WHERE user_id = auth.uid()
+        UNION
+        SELECT id FROM bussiness WHERE staff_emails @> ARRAY[auth.email()]
     ));
 
 CREATE POLICY "Users can update products from their business" 
     ON products FOR UPDATE 
     USING (business_id IN (
-        SELECT id FROM businesses WHERE user_id = auth.uid()
+        SELECT id FROM bussiness WHERE user_id = auth.uid()
+        UNION
+        SELECT id FROM bussiness WHERE staff_emails @> ARRAY[auth.email()]
     ));
 
 CREATE POLICY "Users can delete products from their business" 
     ON products FOR DELETE 
     USING (business_id IN (
-        SELECT id FROM businesses WHERE user_id = auth.uid()
+        SELECT id FROM bussiness WHERE user_id = auth.uid()
+        UNION
+        SELECT id FROM bussiness WHERE staff_emails @> ARRAY[auth.email()]
     ));
-
--- RLS Policies for businesses table
-CREATE POLICY "Users can view their own business" 
-    ON businesses FOR SELECT 
-    USING (user_id = auth.uid());
-
-CREATE POLICY "Users can insert their own business" 
-    ON businesses FOR INSERT 
-    WITH CHECK (user_id = auth.uid());
-
-CREATE POLICY "Users can update their own business" 
-    ON businesses FOR UPDATE 
-    USING (user_id = auth.uid());
-
-CREATE POLICY "Users can delete their own business" 
-    ON businesses FOR DELETE 
-    USING (user_id = auth.uid());
 */
