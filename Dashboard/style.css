@@ -665,138 +665,6 @@ body {
 
 
 
-.orders {
-    height: 500px;
-    width: 820px;
-    /* background-color: blue; */
-    position: absolute;
-    left: 240px;
-    border: 1px solid black;
-    top: 130px;
-    display: flex;
-    overflow-y: auto;
-
-}
-
-.the-order {
-    background-color: green;
-    overflow-x: auto;
-
-}
-
-
-.six a {
-    color: blue;
-}
-
-
-
-
-
-.column {
-    width: 150px;
-    /* min-height: 300px; */
-    border-right: 1px solid rgb(40, 46, 129);
-}
-
-.row {
-    height: 45px;
-    width: 100%;
-    /* background-color: grey; */
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    display: flex;
-    overflow: hidden;
-}
-
-
-input[type="checkbox"] {
-    transform: scale(1.5);
-    margin: 10px;
-    background-color: blue;
-    position: relative;
-    left: 10px;
-    top: 0px;
-    accent-color: rgb(35, 26, 120);
-}
-
-.head {
-    position: relative;
-    left: 15px;
-    bottom: 4px;
-    /* background-color: green; */
-}
-
-.data-info {
-    position: relative;
-    left: 15px;
-    bottom: 4px;
-}
-
-
-.column {
-    display: block;
-}
-
-
-.head-top {
-    width: 850px;
-    height: 60px;
-    /* background-color: green; */
-    position: absolute;
-    left: 240px;
-    top: 60px;
-    display: flex;
-}
-
-.exports {
-    position: absolute;
-    right: 30px;
-    width: 140px;
-    height: 40px;
-    top: 10px;
-    background-color: blue;
-    color: white;
-    text-align: center;
-}
-
-.exports p {
-    font-size: 20px;
-    position: relative;
-    bottom: 15px;
-}
-
-
-.six {
-    /* background-color: green; */
-    width: 80px !important;
-}
-
-
-.checked {
-    position: relative;
-    top: 3px;
-}
-
-.delete {
-    position: relative;
-    left: 20px;
-    width: 120px;
-    height: 40px;
-    font-size: 16px;
-    top: 10px;
-    background-color: rgb(209, 28, 28);
-    border: none;
-    color: white;
-}
-
-
-
-
-.header {
-    background-color: rgba(215, 208, 208, 0.413);
-}
-
 
 
 .home-display {
@@ -1151,5 +1019,9 @@ input[type="checkbox"] {
     position: absolute;
     bottom: 180px;
 }
+
+
+
+
 
 

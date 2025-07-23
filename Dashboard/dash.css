@@ -22,7 +22,7 @@
 }
 
 #orders-content {
-    background-color: #008000;
+    /* background-color: #008000; */
     overflow-y: auto;
 }
 
@@ -533,10 +533,7 @@ width: 350px;
 }
 
 
-.the-staff-role{
-    /* background-color: green; */
 
-}
 
 
 .email-staff{
@@ -580,3 +577,209 @@ width: 350px;
     
     height: 0px;
 }
+
+
+
+#orders-content{
+    position: absolute;
+    left: 240px;
+}
+
+
+.content-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .head-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .checked {
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .delete:hover {
+            background-color: #c82333;
+        }
+
+        .exports {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .exports p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .exports:hover {
+            background-color: #218838;
+        }
+
+        .the-order {
+            overflow-x: auto;
+        }
+
+        .orders {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+            /* border: 1px solid black; */
+            /* border-bottom: 1px solid black; */
+        }
+
+        .orders th,
+        .orders td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .orders th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .orders tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .orders tr.data:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        .orders tr.data:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .head {
+            margin: 0;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .data-info {
+            margin: 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .data-info.date {
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .data-info.receipt {
+            color: #28a745;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .data-info.receipt:hover {
+            color: #1e7e34;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            width: 16px;
+            height: 16px;
+            accent-color: #007bff;
+        }
+
+        .column.one {
+            width: 120px;
+        }
+
+        .column.two {
+            width: 150px;
+        }
+
+        .column.three {
+            width: 120px;
+        }
+
+        .column.four {
+            width: 100px;
+        }
+
+        .column.five {
+            width: 130px;
+        }
+
+        .column.six {
+            width: 100px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .head-top {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .head-top > * {
+                text-align: center;
+            }
+
+            .orders th,
+            .orders td {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+
+
+        .delete{
+            position: relative;
+            right: 300px;
+        }
+
+
+        .five .date{
+            color: grey;
+        }
+
+        input[type="checkbox"] {
+    
+    
+    background-color: blue;
+    position: relative;
+    
+    top: 0px;
+    accent-color: rgb(35, 26, 120);
+}
+
+
+
+

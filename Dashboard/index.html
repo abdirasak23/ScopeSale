@@ -301,85 +301,79 @@
                     </div>
                 </div>
                 <div class="the-order">
-                    <div class="orders">
-                        <div class="column one">
-                            <div class="row header">
-                                <input type="checkbox" name="check" value="yes">
-                                <p class="head">OrderID</p>
-                            </div>
-                            <div class="row data">
-                                <input type="checkbox" name="check" value="yes">
-                                <p class="data-info">ORD001</p>
-                            </div>
-                            <div class="row data">
-                                <input type="checkbox" name="check" value="yes">
-                                <p class="data-info">ORD001</p>
-                            </div>
-                        </div>
-                        <div class="column two">
-                            <div class="row header">
-                                <p class="head">Total Products</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">Iphone 13</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">Iphone 13</p>
-                            </div>
-                        </div>
-                        <div class="column three">
-                            <div class="row header">
-                                <p class="head">Total Price</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">$400</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">$400</p>
-                            </div>
-                        </div>
-                        <div class="column four">
-                            <div class="row header">
-                                <p class="head">Payment</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">Online</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">Online</p>
-                            </div>
-                        </div>
-                        <div class="column five">
-                            <div class="row header">
-                                <p class="head">Order Date</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info date">10/02/2005</p>
-                            </div>
-                            <div class="row data">
-                                <p class="data-info">10/02/2005</p>
-                            </div>
-
-
-
-                        </div>
-                        <div class="column six">
-                            <div class="row header">
-                                <p class="head">Receipt</p>
-                            </div>
-                            <div class="row data">
-                                <a href="">
-                                    <p class="data-info receipt">view</p>
-                                </a>
-                            </div>
-                            <div class="row data">
-                                <a href="">
-                                    <p class="data-info receipt">view</p>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
+                    <table class="orders">
+                        <thead>
+                            <tr class="row header">
+                                <th class="column one">
+                                    <input type="checkbox" name="check" value="yes">
+                                    <span class="head">OrderID</span>
+                                </th>
+                                <th class="column two">
+                                    <span class="head">Total Products</span>
+                                </th>
+                                <th class="column three">
+                                    <span class="head">Total Price</span>
+                                </th>
+                                <th class="column four">
+                                    <span class="head">Payment</span>
+                                </th>
+                                <th class="column five">
+                                    <span class="head">Order Date</span>
+                                </th>
+                                <th class="column six">
+                                    <span class="head">Receipt</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row data">
+                                <td class="column one">
+                                    <input type="checkbox" name="check" value="yes">
+                                    <span class="data-info">ORD001</span>
+                                </td>
+                                <td class="column two">
+                                    <span class="data-info">Iphone 13</span>
+                                </td>
+                                <td class="column three">
+                                    <span class="data-info">$400</span>
+                                </td>
+                                <td class="column four">
+                                    <span class="data-info">Online</span>
+                                </td>
+                                <td class="column five">
+                                    <span class="data-info date">10/02/2005</span>
+                                </td>
+                                <td class="column six">
+                                    <a href="">
+                                        <span class="data-info receipt">view</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="row data">
+                                <td class="column one">
+                                    <input type="checkbox" name="check" value="yes">
+                                    <span class="data-info">ORD002</span>
+                                </td>
+                                <td class="column two">
+                                    <span class="data-info">Iphone 13</span>
+                                </td>
+                                <td class="column three">
+                                    <span class="data-info">$400</span>
+                                </td>
+                                <td class="column four">
+                                    <span class="data-info">Online</span>
+                                </td>
+                                <td class="column five">
+                                    <span class="data-info">10/02/2005</span>
+                                </td>
+                                <td class="column six">
+                                    <a href="">
+                                        <span class="data-info receipt">view</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="content-section" id="black-content">
@@ -664,6 +658,8 @@
                 </div>
 
             </div>
+
+            
         </div>
     </div>
     </div>
@@ -703,6 +699,7 @@
     <script type="module" src="refresh.js"></script>
     <script type="module" src="profile.js"></script>
     <script type="module" src="business.js"></script>
+    <script type="module" src="reciept.js"></script>
 
     <script src="search.js"></script>
 </body>
