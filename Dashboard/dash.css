@@ -239,10 +239,10 @@ width: 350px;
     object-fit: cover;
 }
 
-.pro {
+/* .pro {
     position: absolute;
     top: 140px;
-}
+} */
 
 
 .cat-filter {
@@ -258,8 +258,8 @@ width: 350px;
     left: 240px;
     overflow-y: auto;
     /* background-color: green; */
-    height: 100%;
-    width: 850px;
+    height: 550px;
+    width: 1000px;
     overflow-x: hidden;
 }
 
@@ -438,10 +438,11 @@ width: 350px;
 
 .business-product{
     /* background-color: grey; */
-    height: 400px;
+    height: 300px;
     width: 850px;
     position: relative;
     top: 80px;
+    /* overflow: auto; */
     
 }
 
@@ -560,13 +561,21 @@ width: 350px;
 .much-details{
     /* background-color: green; */
     width: 250px;
+    position: relative;
+    left: 60px;
+    display: block;
     
+}
+
+.business-address{
+    position: relative;
+    top: 5px;
 }
 
 
 .business-num{
     position: relative;
-    top: 50px;
+    top: 85px;
     height: 0px;
     margin-top: 20px;
 }
@@ -574,8 +583,10 @@ width: 350px;
 
 .bus-em{
     position: relative;
-    
+    background-color: red;
     height: 0px;
+    top: 60px;
+    /* top: 10px; */
 }
 
 
@@ -783,3 +794,36 @@ width: 350px;
 
 
 
+
+
+
+.units-data{
+    /* background-color: red; */
+    width: 160px;
+}
+
+
+.inven{
+    height: 50px;
+    width: 200px;
+    background-color: rgb(42, 120, 254);
+    position: absolute;
+    left: 850px;
+    top: 70px;
+    border: none;
+    font-size: 18px;
+    color: white;
+    font-family: 'Outfit';
+    cursor: pointer;
+    text-align: center;
+    align-items: center;
+}
+
+
+.inven p{
+    position: relative;
+    text-align: center;
+    left: 40px;
+    top: -2px;
+    
+}

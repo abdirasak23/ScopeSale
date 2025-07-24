@@ -346,16 +346,16 @@ class ProductFetcher {
         
         if (unitAmount > 0 && unitType) {
             // Both amount and type available
-            unitDisplay = `<span class="unit-amounts">${unitAmount}</span> <span class="unit-types">${unitType}</span>`;
+            unitDisplay = `<span class="unit-amounts" style='color: black;'>${unitAmount}</span> <span class="unit-types" style='color: black;'>${unitType}</span>`;
         } else if (unitAmount > 0 && !unitType) {
             // Only amount available
-            unitDisplay = `<span class="unit-amounts">${unitAmount}</span> <span class="unit-types">units</span>`;
+            unitDisplay = `<span class="unit-amounts" style='color: black;'>${unitAmount}</span> <span class="unit-types">units</span>`;
         } else if (!unitAmount && unitType) {
             // Only type available (no amount)
-            unitDisplay = `<span class="unit-types">${unitType}</span>`;
+            unitDisplay = `<span class="unit-types" style='color: black;'>${unitType}</span>`;
         } else {
             // Neither available
-            unitDisplay = '<span class="no-unit-info">No unit info</span>';
+            unitDisplay = '<span class="no-unit-info" style="color: black;" >No unit info</span>';
         }
         
         // Create stock status with appropriate styling

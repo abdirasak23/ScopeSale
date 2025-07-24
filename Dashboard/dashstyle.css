@@ -1,9 +1,15 @@
 #inventory-content{
     position: absolute;
+    
     left: 240px;
-    overflow-y: auto;
+    
 }
 
+.the-inventory{
+overflow-y: auto;
+/* background-color: red; */
+    height: 500px;
+}
 
 .inventory{
     position: relative;
@@ -29,5 +35,6 @@
     background-color: rgb(38, 38, 144);
 
 }
+
 
 

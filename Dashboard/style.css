@@ -38,8 +38,9 @@ body {
 
 .content {
     /* background-color: rgba(60, 159, 60, 0.226); */
-    width: calc(100% - 400px);
+    width: calc(100% - 200px);
     height: 500px;
+    overflow-y: auto;
     border-right: 1px solid black;
 }
 
@@ -245,16 +246,34 @@ body {
 .pro {
     display: grid;
     gap: 10px;
+    width: 860px;
     grid-template-columns: 1fr 1fr;
-    overflow: auto;
+    overflow-y: auto;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    height: auto;
-    overflow: visible;
+    height: 500px;
+    /* margin-right: 50px; */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #888 transparent;
+    /* overflow: visible; */
     /* background-color: #333; */
 
 }
 
+
+.pro::-webkit-scrollbar {
+    height: 6px; /* horizontal scrollbar height */
+    width: 6px;  /* vertical scrollbar width */
+}
+
+.pro::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.pro::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
 
 .scroll-container::-webkit-scrollbar {
@@ -949,6 +968,7 @@ body {
 .pro{
     position: absolute;
     left: 250px;
+    top: 140px;
     /* background-color: green; */
 }
 
