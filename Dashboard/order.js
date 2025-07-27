@@ -150,7 +150,7 @@ window.checkboxFunctionality = {
     }
 };
 
-// ===== ORDER MANAGER WITH BUSINESS ID FILTERING =====
+// ===== ORDER MANAGER WITH BUSINESS ID FILTERING AND SALER INFO =====
 class OrderManager {
     constructor() {
         this.orders = [];
@@ -158,6 +158,8 @@ class OrderManager {
         this.isFiltered = false;
         this.currentUser = null;
         this.userBusinessId = null;
+        this.businessData = null;
+        this.usersCache = new Map(); // Cache for user data
         this.init();
     }
 
@@ -214,7 +216,7 @@ class OrderManager {
             // Try to find business where user is the owner
             let { data: businessData, error: businessError } = await supabaseClient
                 .from('bussiness')
-                .select('id, staff_emails')
+                .select('id, staff_emails, user_id')
                 .eq('user_id', userId)
                 .maybeSingle();
 
@@ -222,13 +224,13 @@ class OrderManager {
             if (!businessData) {
                 let { data: staffBusinesses, error: staffError } = await supabaseClient
                     .from('bussiness')
-                    .select('id, staff_emails')
+                    .select('id, staff_emails, user_id')
                     .contains('staff_emails', [userEmail]);
 
                 if (staffError) {
                     const { data: allBusinesses, error: allError } = await supabaseClient
                         .from('bussiness')
-                        .select('id, staff_emails');
+                        .select('id, staff_emails, user_id');
                     if (!allError && Array.isArray(allBusinesses)) {
                         staffBusinesses = allBusinesses.filter(biz =>
                             Array.isArray(biz.staff_emails) && biz.staff_emails.includes(userEmail)
@@ -246,11 +248,117 @@ class OrderManager {
             }
 
             this.userBusinessId = businessData.id;
+            this.businessData = businessData;
             console.log('User business ID:', this.userBusinessId);
+            console.log('Business data:', this.businessData);
 
         } catch (error) {
             console.error('Error getting business ID:', error);
             throw error;
+        }
+    }
+
+    // Fetch user data by user ID or email and cache it
+    async fetchUserData(userId = null, email = null) {
+        try {
+            // Create cache key
+            const cacheKey = userId || email;
+            
+            // Check cache first
+            if (this.usersCache.has(cacheKey)) {
+                return this.usersCache.get(cacheKey);
+            }
+
+            let userData = null;
+
+            if (userId) {
+                // Fetch by user ID
+                const { data, error } = await supabaseClient
+                    .from('users')
+                    .select('id, username, email')
+                    .eq('id', userId)
+                    .maybeSingle();
+
+                if (error) {
+                    console.error('Error fetching user by ID:', error);
+                    return null;
+                }
+                userData = data;
+            } else if (email) {
+                // Fetch by email
+                const { data, error } = await supabaseClient
+                    .from('users')
+                    .select('id, username, email')
+                    .eq('email', email)
+                    .maybeSingle();
+
+                if (error) {
+                    console.error('Error fetching user by email:', error);
+                    return null;
+                }
+                userData = data;
+            }
+
+            // Cache the result
+            if (userData) {
+                this.usersCache.set(cacheKey, userData);
+                // Also cache by both id and email if we have both
+                if (userData.id && userData.email) {
+                    this.usersCache.set(userData.id, userData);
+                    this.usersCache.set(userData.email, userData);
+                }
+            }
+
+            return userData;
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            return null;
+        }
+    }
+
+    // Get saler name from order
+    async getSalerName(order) {
+        try {
+            // Check if order has saler_id (if you have this field in orders table)
+            if (order.saler_id) {
+                const userData = await this.fetchUserData(order.saler_id);
+                return userData ? userData.username : 'Unknown Saler';
+            }
+
+            // Check if order has saler_email (if you have this field in orders table)
+            if (order.saler_email) {
+                const userData = await this.fetchUserData(null, order.saler_email);
+                return userData ? userData.username : 'Unknown Saler';
+            }
+
+            // If no specific saler info in order, check who created the order
+            // This assumes the order was created by the current authenticated user
+            if (order.created_by) {
+                const userData = await this.fetchUserData(order.created_by);
+                return userData ? userData.username : 'Unknown Saler';
+            }
+
+            // Fallback: Try to determine from current user context
+            // Check if current user is the business owner
+            if (this.businessData && this.businessData.user_id === this.currentUser.id) {
+                // Current user is the business owner
+                const userData = await this.fetchUserData(this.currentUser.id);
+                return userData ? userData.username : 'Business Owner';
+            }
+
+            // Check if current user is staff
+            if (this.businessData && 
+                Array.isArray(this.businessData.staff_emails) && 
+                this.businessData.staff_emails.includes(this.currentUser.email)) {
+                // Current user is staff
+                const userData = await this.fetchUserData(null, this.currentUser.email);
+                return userData ? userData.username : 'Staff Member';
+            }
+
+            return 'Unknown Saler';
+        } catch (error) {
+            console.error('Error getting saler name:', error);
+            return 'Error Loading Saler';
         }
     }
 
@@ -265,7 +373,7 @@ class OrderManager {
 
             const { data: orders, error } = await supabaseClient
                 .from('orders')
-                .select('id, order_number, ordername, quantity, totalprice, payment_method, created_at')
+                .select('id, order_number, ordername, quantity, totalprice, payment_method, created_at, saler_id, saler_email, created_by')
                 .eq('business_id', this.userBusinessId)
                 .order('created_at', { ascending: false });
 
@@ -286,7 +394,7 @@ class OrderManager {
     }
 
     // Render orders in the HTML table structure
-    renderOrders() {
+    async renderOrders() {
         try {
             const tbody = document.querySelector('.orders tbody');
             if (!tbody) {
@@ -305,9 +413,9 @@ class OrderManager {
             }
 
             // Add data rows for each order
-            ordersToRender.forEach((order, index) => {
-                this.addOrderRow(order, index);
-            });
+            for (let i = 0; i < ordersToRender.length; i++) {
+                await this.addOrderRow(ordersToRender[i], i);
+            }
 
             // Reinitialize checkbox functionality after rendering
             if (window.initializeCheckboxes) {
@@ -321,7 +429,7 @@ class OrderManager {
     }
 
     // Add a single order row to the table
-    addOrderRow(order, index) {
+    async addOrderRow(order, index) {
         try {
             const tbody = document.querySelector('.orders tbody');
             if (!tbody) return;
@@ -340,6 +448,9 @@ class OrderManager {
 
             // Payment method
             const paymentMethod = order.payment_method || 'N/A';
+
+            // Get saler name
+            const salerName = await this.getSalerName(order);
 
             // Create table row
             const row = document.createElement('tr');
@@ -364,10 +475,15 @@ class OrderManager {
                     <span class="data-info date">${orderDateTime}</span>
                 </td>
                 <td class="column six">
-    <a href="#" onclick="viewReceipt('${orderId}')">
-        <span class="data-info receipt">view</span>
-    </a>
-</td>
+                    <a href="#" onclick="viewReceipt('${orderId}')">
+                        <span class="data-info receipt">view</span>
+                    </a>
+                </td>
+                <td class="column seven">
+                    
+                        <span class="data-info ">${salerName}</span>
+                    
+                </td>
             `;
 
             tbody.appendChild(row);
@@ -485,6 +601,9 @@ class OrderManager {
             <td class="column six">
                 <a href="#"><span class="data-info receipt">-</span></a>
             </td>
+            <td class="column seven">
+                <span class="data-info " >-</span>
+            </td>
         `;
 
         tbody.appendChild(row);
@@ -562,8 +681,10 @@ class OrderManager {
     async refreshOrders() {
         try {
             this.showMessage('Refreshing orders...', 'info');
+            // Clear cache to get fresh user data
+            this.usersCache.clear();
             await this.fetchOrders();
-            this.renderOrders();
+            await this.renderOrders();
             this.showMessage('Orders refreshed successfully', 'success');
         } catch (error) {
             console.error('Error refreshing orders:', error);
@@ -716,7 +837,7 @@ window.viewReceipt = (orderId) => {
     alert(`Receipt for order ${orderId} - Feature to be implemented`);
 };
 
-// Export orders function
+// Export orders function with saler information
 window.exportOrders = async (format = 'csv') => {
     try {
         const orderManager = window.orderManager;
@@ -731,18 +852,19 @@ window.exportOrders = async (format = 'csv') => {
             return;
         }
 
-        const headers = ['Order ID', 'Products', 'Total Price', 'Payment Method', 'Date & Time'];
+        const headers = ['Order ID', 'Products', 'Total Price', 'Payment Method', 'Date & Time', 'Saler'];
         let content = headers.join(',') + '\n';
 
-        orders.forEach(order => {
+        for (const order of orders) {
             const orderId = order.order_number || `ORD${String(order.id).padStart(3, '0')}`;
             const productInfo = orderManager.getProductInfoFromOrder(order);
             const totalPrice = parseFloat(order.totalprice || 0).toFixed(2);
             const paymentMethod = order.payment_method || 'N/A';
             const dateTime = orderManager.formatDateTime(order.created_at);
+            const salerName = await orderManager.getSalerName(order);
 
-            content += `"${orderId}","${productInfo}","$${totalPrice}","${paymentMethod}","${dateTime}"\n`;
-        });
+            content += `"${orderId}","${productInfo}","$${totalPrice}","${paymentMethod}","${dateTime}","${salerName}"\n`;
+        }
 
         const filename = `orders_${new Date().toISOString().split('T')[0]}.csv`;
         const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
@@ -764,6 +886,3 @@ window.exportOrders = async (format = 'csv') => {
         alert('Failed to export orders');
     }
 };
-
-
-

@@ -370,7 +370,7 @@ class ProductFetcher {
     displayProducts(products) {
         console.log('🎨 Displaying products:', products.length);
         
-        const productContainer = document.querySelector('.pro');
+        const productContainer = document.querySelector('.the-product-manager');
         if (!productContainer) {
             console.error('❌ Product container (.pro) not found');
             return;
@@ -867,19 +867,19 @@ function initializeRealTimeUpdates() {
     }
     
     // Navigation updates
-    const navItems = document.querySelectorAll('.home[data-target]');
-    navItems.forEach(item => {
-        item.addEventListener('click', async function() {
-            const targetId = this.getAttribute('data-target');
+    // const navItems = document.querySelectorAll('.home[data-target]');
+    // navItems.forEach(item => {
+    //     item.addEventListener('click', async function() {
+    //         const targetId = this.getAttribute('data-target');
             
-            if (targetId === 'product-content' && productFetcher) {
-                // Refresh products when navigating to product view
-                setTimeout(async () => {
-                    await productFetcher.refreshProducts();
-                }, 100);
-            }
-        });
-    });
+    //         if (targetId === 'product-content' && productFetcher) {
+    //             // Refresh products when navigating to product view
+    //             setTimeout(async () => {
+    //                 await productFetcher.refreshProducts();
+    //             }, 100);
+    //         }
+    //     });
+    // });
     
     console.log('✅ Real-time updates initialized');
 }

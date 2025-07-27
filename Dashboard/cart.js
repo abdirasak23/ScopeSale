@@ -1,4 +1,4 @@
-// Cart Management Class with Order Confirmation System and Business ID Integration
+// Cart Management Class with Order Confirmation System, Business ID Integration, and Seller Information
 class CartManager {
     constructor() {
         this.cartKey = 'shopping_cart';
@@ -24,6 +24,26 @@ class CartManager {
             localStorage.setItem(this.cartKey, JSON.stringify(this.cart));
         } catch (error) {
             console.error('Error saving cart to storage:', error);
+        }
+    }
+
+    // Get current user's information (ID and email)
+    async getCurrentUserInfo() {
+        try {
+            const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+
+            if (userError || !user) {
+                console.error('Error getting current user:', userError);
+                throw new Error('User not authenticated');
+            }
+
+            return {
+                id: user.id,
+                email: user.email
+            };
+        } catch (error) {
+            console.error('Error getting current user info:', error);
+            throw error;
         }
     }
 
@@ -288,7 +308,7 @@ class CartManager {
 
             .popup-container {
                 background: white;
-                border-radius: 10px;
+                border-radius: 0px;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
                 width: 90%;
                 max-width: 400px;
@@ -357,7 +377,7 @@ class CartManager {
             }
 
             .sell-button {
-                background: #2ecc71;
+                background: #2d22c0ff;
                 color: white;
             }
 
@@ -434,14 +454,18 @@ class CartManager {
         }
     }
 
-    // Save order to Supabase with payment method and business_id
+    // Save order to Supabase with payment method, business_id, seller_id, and seller_email
     async saveOrderToDatabase(paymentMethod) {
         try {
             console.log('Starting order save process...');
             
-            // Get current business ID first
+            // Get current business ID and user info
             const businessId = await this.getCurrentBusinessId();
+            const userInfo = await this.getCurrentUserInfo();
+            
             console.log('Using business ID:', businessId);
+            console.log('Seller ID:', userInfo.id);
+            console.log('Seller Email:', userInfo.email);
             
             // Prepare order items
             const orderItems = [];
@@ -479,14 +503,16 @@ class CartManager {
                 });
             }
             
-            // Create order data with payment method and business_id
+            // Create order data with payment method, business_id, seller_id, and seller_email
             const orderData = {
                 ordername: orderItems,
                 quantity: totalQuantity,
                 price: orderItems[0]?.unit_price || 0,
                 totalprice: totalPrice,
                 payment_method: paymentMethod,
-                business_id: businessId, // Add business_id to link order to current user's business
+                business_id: businessId, // Link order to current user's business
+                saler_id: userInfo.id, // ID of the user who made the sale
+                saler_email: userInfo.email, // Email of the user who made the sale
                 created_at: new Date().toISOString()
             };
             
@@ -503,7 +529,7 @@ class CartManager {
                 throw new Error(`Failed to save order: ${insertError.message}`);
             }
             
-            console.log("Order saved successfully with business_id:", insertedOrder);
+            console.log("Order saved successfully with seller info:", insertedOrder);
             
             // Update product stock for each item
             for (const cartItem of this.cart) {
@@ -675,7 +701,7 @@ class CartManager {
                 return false;
             }
             
-            // Save order to database (this includes stock updates and business_id)
+            // Save order to database (this includes stock updates, business_id, seller_id, and seller_email)
             await this.saveOrderToDatabase(paymentMethod);
             
             // Clear cart only if everything succeeded
@@ -921,3 +947,15 @@ window.clearCart = () => cartManager.clearCart();
 window.addToCart = (productId, quantity = 1) => cartManager.addToCart(productId, quantity);
 window.removeFromCart = (productId) => cartManager.removeFromCart(productId);
 window.updateCartQuantity = (productId, quantity) => cartManager.updateQuantity(productId, quantity);
+
+// Additional CSS for fade animation
+const fadeAnimationStyle = document.createElement('style');
+fadeAnimationStyle.textContent = `
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateX(100%); }
+        10% { opacity: 1; transform: translateX(0); }
+        90% { opacity: 1; transform: translateX(0); }
+        100% { opacity: 0; transform: translateX(100%); }
+    }
+`;
+document.head.appendChild(fadeAnimationStyle);

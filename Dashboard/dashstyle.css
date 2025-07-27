@@ -1,22 +1,22 @@
-#inventory-content{
+#inventory-content {
     position: absolute;
-    
+
     left: 240px;
-    
+
 }
 
-.the-inventory{
-overflow-y: auto;
-/* background-color: red; */
+.the-inventory {
+    overflow-y: auto;
+    /* background-color: red; */
     height: 500px;
 }
 
-.inventory{
+.inventory {
     position: relative;
 }
 
 
-.head-data{
+.head-data {
     position: relative;
     height: 60px;
     width: 600px;
@@ -24,7 +24,7 @@ overflow-y: auto;
     /* background-color: green; */
 }
 
-.edit-product{
+.edit-product {
     height: 40px;
     width: 150px;
     position: relative;
@@ -38,3 +38,51 @@ overflow-y: auto;
 
 
 
+
+.bottom-navigator{
+    display: none;
+}
+
+
+
+@media only screen and (max-width: 480px) {
+    body{
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    *{
+        overflow: hidden;
+    }
+
+    .top{
+        background-color: grey;
+        height: 100px;
+        display: block;
+    }
+
+
+    .cart{
+        display: none;
+    }
+
+    .logo{
+        width: 240px;
+        height: 25px;
+        /* background-color: red; */
+        position: relative;
+        top: 15px;
+    }
+
+
+    
+
+
+    
+
+
+   
+
+
+}

@@ -633,7 +633,7 @@ width: 350px;
         }
 
         .exports {
-            background-color: #28a745;
+            /* background-color: #28a745; */
             color: white;
             padding: 8px 16px;
             border-radius: 4px;
@@ -645,9 +645,9 @@ width: 350px;
             font-size: 14px;
         }
 
-        .exports:hover {
+        /* .exports:hover {
             background-color: #218838;
-        }
+        } */
 
         .the-order {
             overflow-x: auto;
@@ -826,4 +826,35 @@ width: 350px;
     left: 40px;
     top: -2px;
     
+}
+
+
+
+.managers{
+
+    height: 500px;
+    width: 860px;
+    /* background-color: rgb(0, 64, 128); */
+    position: absolute;
+    left: 260px;
+    top: 160px;
+    display: grid;
+    overflow-y: auto;
+}
+
+
+.the-product-manager{
+    display: grid;
+    height: 40px;
+    gap: 10px;
+    position: relative;
+    top: 5px;
+    /* overflow: hidden; */
+    grid-template-columns: repeat(2,auto);
+    
+}
+
+
+.seven span{
+    color: grey;
 }

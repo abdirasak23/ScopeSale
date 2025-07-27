@@ -155,10 +155,11 @@ class InventoryManager {
     constructor() {
         this.products = [];
         this.filteredProducts = [];
+        this.orders = [];
+        this.salesData = {};
         this.isFiltered = false;
         this.currentUser = null;
         this.userBusinessId = null;
-        this.salesData = new Map(); // To store sales calculations for each product
         this.init();
     }
 
@@ -170,7 +171,8 @@ class InventoryManager {
             await this.getAuthenticatedUser();
             await this.fetchUserBusinessId();
             await this.fetchProducts();
-            await this.calculateSalesData();
+            await this.fetchOrdersForSalesCalculation();
+            this.calculateSalesData();
             this.renderProducts();
             this.setupEventListeners();
             this.setupDeleteButton();
@@ -267,7 +269,7 @@ class InventoryManager {
 
             const { data: products, error } = await supabaseClient
                 .from('products')
-                .select('id, name, price, category, stock')
+                .select('id, name, price, stock, category, created_at')
                 .eq('business_id', this.userBusinessId)
                 .order('created_at', { ascending: false });
 
@@ -287,94 +289,113 @@ class InventoryManager {
         }
     }
 
-    // Calculate sales data for each product
-    async calculateSalesData() {
+    // Fetch orders to calculate sales data
+    async fetchOrdersForSalesCalculation() {
         try {
             if (!this.userBusinessId) {
                 throw new Error('No business ID available');
             }
 
-            console.log('Calculating sales data...');
+            console.log('Fetching orders for sales calculation...');
 
-            // Fetch all orders for the business
             const { data: orders, error } = await supabaseClient
                 .from('orders')
-                .select('ordername, totalprice')
+                .select('id, ordername, totalprice, created_at')
                 .eq('business_id', this.userBusinessId);
 
             if (error) {
                 throw new Error(`Orders fetch error: ${error.message}`);
             }
 
-            // Initialize sales data map
-            this.salesData.clear();
-            this.products.forEach(product => {
-                this.salesData.set(product.id, {
-                    numTimes: 0,
-                    totalPrice: 0
-                });
-            });
-
-            // Process each order to calculate sales
-            orders.forEach(order => {
-                this.processOrderForSales(order);
-            });
-
-            console.log('Sales data calculated successfully');
+            this.orders = orders || [];
+            console.log(`Fetched ${this.orders.length} orders for sales calculation`);
 
         } catch (error) {
-            console.error('Error calculating sales data:', error);
+            console.error('Error fetching orders for sales calculation:', error);
+            throw error;
         }
     }
 
-    // Process individual order to extract product sales
-    processOrderForSales(order) {
+    // Calculate sales data for each product
+    calculateSalesData() {
         try {
-            let orderItems = [];
+            console.log('Calculating sales data...');
+            
+            // Initialize sales data for all products
+            this.salesData = {};
+            this.products.forEach(product => {
+                this.salesData[product.name.toLowerCase()] = {
+                    timesSold: 0,
+                    totalRevenue: 0
+                };
+            });
 
-            // Handle different formats of ordername
-            if (order.ordername) {
-                if (Array.isArray(order.ordername)) {
-                    orderItems = order.ordername;
-                } else if (typeof order.ordername === 'string') {
-                    try {
-                        // Try to parse JSON string
-                        const parsed = JSON.parse(order.ordername);
-                        if (Array.isArray(parsed)) {
-                            orderItems = parsed;
-                        } else {
-                            // Single product as string
-                            orderItems = [{ name: order.ordername, quantity: 1, price: order.totalprice }];
+            // Process each order to calculate sales
+            this.orders.forEach(order => {
+                try {
+                    let orderItems = [];
+
+                    // Parse order items from ordername field
+                    if (order.ordername) {
+                        if (Array.isArray(order.ordername)) {
+                            orderItems = order.ordername;
+                        } else if (typeof order.ordername === 'string') {
+                            try {
+                                // Try to parse JSON string
+                                const parsed = JSON.parse(order.ordername);
+                                if (Array.isArray(parsed)) {
+                                    orderItems = parsed;
+                                } else {
+                                    // Single product as string
+                                    orderItems = [{ name: order.ordername, quantity: 1, price: order.totalprice || 0 }];
+                                }
+                            } catch (e) {
+                                // Not JSON, treat as single product name
+                                orderItems = [{ name: order.ordername, quantity: 1, price: order.totalprice || 0 }];
+                            }
                         }
-                    } catch (e) {
-                        // Not JSON, treat as single product name
-                        orderItems = [{ name: order.ordername, quantity: 1, price: order.totalprice }];
                     }
-                }
-            }
 
-            // Match order items with products and update sales data
-            orderItems.forEach(item => {
-                const productName = item.name || item.product_name;
-                const quantity = parseInt(item.quantity) || 1;
-                const itemPrice = parseFloat(item.price) || 0;
+                    // Update sales data for each item in the order
+                    orderItems.forEach(item => {
+                        const productName = (item.name || item.product_name || '').toLowerCase();
+                        const quantity = parseInt(item.quantity) || 1;
+                        const itemPrice = parseFloat(item.price) || 0;
 
-                // Find matching product by name
-                const matchingProduct = this.products.find(product => 
-                    product.name.toLowerCase() === productName.toLowerCase()
-                );
-
-                if (matchingProduct) {
-                    const currentSales = this.salesData.get(matchingProduct.id);
-                    this.salesData.set(matchingProduct.id, {
-                        numTimes: currentSales.numTimes + quantity,
-                        totalPrice: currentSales.totalPrice + (itemPrice * quantity)
+                        if (productName && this.salesData[productName]) {
+                            this.salesData[productName].timesSold += quantity;
+                            
+                            // If item has individual price, use it; otherwise distribute total order price
+                            if (itemPrice > 0) {
+                                this.salesData[productName].totalRevenue += (itemPrice * quantity);
+                            } else if (orderItems.length === 1) {
+                                // Single item order, use total order price
+                                this.salesData[productName].totalRevenue += parseFloat(order.totalprice || 0);
+                            } else {
+                                // Multiple items, estimate by dividing total price
+                                const estimatedPrice = parseFloat(order.totalprice || 0) / orderItems.length;
+                                this.salesData[productName].totalRevenue += (estimatedPrice * quantity);
+                            }
+                        }
                     });
+
+                } catch (itemError) {
+                    console.error('Error processing order item:', itemError, order);
                 }
             });
 
+            console.log('Sales data calculated:', this.salesData);
+
         } catch (error) {
-            console.error('Error processing order for sales:', error);
+            console.error('Error calculating sales data:', error);
+            // Initialize empty sales data on error
+            this.salesData = {};
+            this.products.forEach(product => {
+                this.salesData[product.name.toLowerCase()] = {
+                    timesSold: 0,
+                    totalRevenue: 0
+                };
+            });
         }
     }
 
@@ -422,18 +443,15 @@ class InventoryManager {
             // Generate product ID
             const productId = `PRO${String(product.id).padStart(3, '0')}`;
 
-            // Format price
+            // Get product information
+            const productName = product.name || 'Unknown Product';
             const totalPrice = `$${parseFloat(product.price || 0).toFixed(2)}`;
+            const quantity = parseInt(product.stock || 0);
+            const category = product.category || 'Uncategorized';
 
-            // Get stock quantity
-            const quantity = parseInt(product.stock) || 0;
-
-            // Get category
-            const category = product.category || 'N/A';
-
-            // Get sales data
-            const salesInfo = this.salesData.get(product.id) || { numTimes: 0, totalPrice: 0 };
-            const salesDisplay = `${salesInfo.numTimes} (${salesInfo.totalPrice.toFixed(2)})`;
+            // Get sales data for this product
+            const salesInfo = this.salesData[productName.toLowerCase()] || { timesSold: 0, totalRevenue: 0 };
+            const salesDisplay = `${salesInfo.timesSold} (${salesInfo.totalRevenue.toFixed(2)})`;
 
             // Create table row
             const row = document.createElement('tr');
@@ -446,7 +464,7 @@ class InventoryManager {
                     <span class="data-info">${productId}</span>
                 </td>
                 <td class="column two">
-                    <span class="data-info">${product.name}</span>
+                    <span class="data-info">${productName}</span>
                 </td>
                 <td class="column three">
                     <span class="data-info">${totalPrice}</span>
@@ -458,7 +476,7 @@ class InventoryManager {
                     <span class="data-info">${category}</span>
                 </td>
                 <td class="column six">
-                    <a href="#" onclick="viewProductSales('${productId}')">
+                    <a href="#" onclick="viewProductSales('${productId}', '${productName}')">
                         <span class="data-info">${salesDisplay}</span>
                     </a>
                 </td>
@@ -496,7 +514,7 @@ class InventoryManager {
                 <span class="data-info">-</span>
             </td>
             <td class="column six">
-                <a href="#"><span class="data-info">-</span></a>
+                <a href="#"><span class="data-info">0 ($0.00)</span></a>
             </td>
         `;
 
@@ -537,7 +555,7 @@ class InventoryManager {
         }
     }
 
-    // Search products by name, category, or other criteria
+    // Search products by name, category, or ID
     searchProducts(searchTerm) {
         try {
             const term = searchTerm.toLowerCase().trim();
@@ -547,11 +565,13 @@ class InventoryManager {
                 const productName = (product.name || '').toLowerCase();
                 const category = (product.category || '').toLowerCase();
                 const price = String(product.price || '');
+                const stock = String(product.stock || '');
 
                 return productId.includes(term) ||
                     productName.includes(term) ||
                     category.includes(term) ||
-                    price.includes(term);
+                    price.includes(term) ||
+                    stock.includes(term);
             });
 
             this.isFiltered = true;
@@ -576,7 +596,8 @@ class InventoryManager {
         try {
             this.showMessage('Refreshing inventory...', 'info');
             await this.fetchProducts();
-            await this.calculateSalesData();
+            await this.fetchOrdersForSalesCalculation();
+            this.calculateSalesData();
             this.renderProducts();
             this.showMessage('Inventory refreshed successfully', 'success');
         } catch (error) {
@@ -705,7 +726,7 @@ function initializeInventoryRealTimeUpdates() {
 
             // Subscribe to orders table changes (for sales calculation)
             const orderSubscription = supabaseClient
-                .channel('orders-inventory-channel')
+                .channel('orders-for-inventory-channel')
                 .on('postgres_changes',
                     {
                         event: '*',
@@ -714,7 +735,7 @@ function initializeInventoryRealTimeUpdates() {
                         filter: `business_id=eq.${businessId}`
                     },
                     (payload) => {
-                        console.log('Order change detected (for inventory):', payload);
+                        console.log('Order change detected (inventory):', payload);
                         window.inventoryManager?.refreshInventory();
                     }
                 )
@@ -743,20 +764,13 @@ window.searchProducts = (searchTerm) => window.inventoryManager?.searchProducts(
 window.deleteSelectedProducts = () => window.inventoryManager?.deleteSelectedProducts();
 
 // Product sales viewing function
-window.viewProductSales = (productId) => {
+window.viewProductSales = (productId, productName) => {
+    console.log('Viewing sales for product:', productId, productName);
     const inventoryManager = window.inventoryManager;
-    if (!inventoryManager) return;
-    
-    const product = inventoryManager.products.find(p => `PRO${String(p.id).padStart(3, '0')}` === productId);
-    if (!product) return;
-    
-    const salesInfo = inventoryManager.salesData.get(product.id) || { numTimes: 0, totalPrice: 0 };
-    
-    const message = `Sales Details for ${product.name}:\n\n` +
-                   `Times Sold: ${salesInfo.numTimes}\n` +
-                   `Total Revenue: $${salesInfo.totalPrice.toFixed(2)}`;
-    
-    alert(message);
+    if (inventoryManager) {
+        const salesInfo = inventoryManager.salesData[productName.toLowerCase()] || { timesSold: 0, totalRevenue: 0 };
+        alert(`Sales for ${productName}:\n\nTimes Sold: ${salesInfo.timesSold}\nTotal Revenue: $${salesInfo.totalRevenue.toFixed(2)}`);
+    }
 };
 
 // Export inventory function
@@ -774,18 +788,21 @@ window.exportInventory = async (format = 'csv') => {
             return;
         }
 
-        const headers = ['Product ID', 'Product Name', 'Price', 'Stock', 'Category', 'Sales (Times/Revenue)'];
+        const headers = ['Product ID', 'Product Name', 'Price', 'Stock', 'Category', 'Times Sold', 'Revenue Generated'];
         let content = headers.join(',') + '\n';
 
         products.forEach(product => {
             const productId = `PRO${String(product.id).padStart(3, '0')}`;
+            const productName = product.name || 'Unknown Product';
             const price = parseFloat(product.price || 0).toFixed(2);
-            const stock = parseInt(product.stock) || 0;
-            const category = product.category || 'N/A';
-            const salesInfo = inventoryManager.salesData.get(product.id) || { numTimes: 0, totalPrice: 0 };
-            const salesDisplay = `${salesInfo.numTimes}/$${salesInfo.totalPrice.toFixed(2)}`;
+            const stock = parseInt(product.stock || 0);
+            const category = product.category || 'Uncategorized';
+            
+            const salesInfo = inventoryManager.salesData[productName.toLowerCase()] || { timesSold: 0, totalRevenue: 0 };
+            const timesSold = salesInfo.timesSold;
+            const revenue = salesInfo.totalRevenue.toFixed(2);
 
-            content += `"${productId}","${product.name}","$${price}","${stock}","${category}","${salesDisplay}"\n`;
+            content += `"${productId}","${productName}","$${price}","${stock}","${category}","${timesSold}","$${revenue}"\n`;
         });
 
         const filename = `inventory_${new Date().toISOString().split('T')[0]}.csv`;
@@ -807,4 +824,154 @@ window.exportInventory = async (format = 'csv') => {
         console.error('Error exporting inventory:', error);
         alert('Failed to export inventory');
     }
+};
+
+// Add new product function (can be called from UI)
+window.addNewProduct = async (productData) => {
+    try {
+        const inventoryManager = window.inventoryManager;
+        if (!inventoryManager || !inventoryManager.userBusinessId) {
+            throw new Error('Inventory manager not initialized');
+        }
+
+        const { error } = await supabaseClient
+            .from('products')
+            .insert([{
+                ...productData,
+                business_id: inventoryManager.userBusinessId
+            }]);
+
+        if (error) {
+            throw new Error(`Failed to add product: ${error.message}`);
+        }
+
+        inventoryManager.showMessage('Product added successfully', 'success');
+        await inventoryManager.refreshInventory();
+
+    } catch (error) {
+        console.error('Error adding product:', error);
+        if (window.inventoryManager) {
+            window.inventoryManager.showMessage('Failed to add product', 'error');
+        }
+    }
+};
+
+// Update product function (can be called from UI)
+window.updateProduct = async (productId, updatedData) => {
+    try {
+        const inventoryManager = window.inventoryManager;
+        if (!inventoryManager) {
+            throw new Error('Inventory manager not initialized');
+        }
+
+        const { error } = await supabaseClient
+            .from('products')
+            .update(updatedData)
+            .eq('id', productId)
+            .eq('business_id', inventoryManager.userBusinessId);
+
+        if (error) {
+            throw new Error(`Failed to update product: ${error.message}`);
+        }
+
+        inventoryManager.showMessage('Product updated successfully', 'success');
+        await inventoryManager.refreshInventory();
+
+    } catch (error) {
+        console.error('Error updating product:', error);
+        if (window.inventoryManager) {
+            window.inventoryManager.showMessage('Failed to update product', 'error');
+        }
+    }
+};
+
+// Get product by ID function
+window.getProductById = (productId) => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return null;
+    
+    return inventoryManager.products.find(product => product.id === productId);
+};
+
+// Get low stock products function
+window.getLowStockProducts = (threshold = 5) => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return [];
+    
+    return inventoryManager.products.filter(product => 
+        parseInt(product.stock || 0) <= threshold
+    );
+};
+
+// Get top selling products function
+window.getTopSellingProducts = (limit = 10) => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return [];
+    
+    const productsWithSales = inventoryManager.products.map(product => ({
+        ...product,
+        salesData: inventoryManager.salesData[product.name.toLowerCase()] || { timesSold: 0, totalRevenue: 0 }
+    }));
+    
+    return productsWithSales
+        .sort((a, b) => b.salesData.timesSold - a.salesData.timesSold)
+        .slice(0, limit);
+};
+
+// Get products by category function
+window.getProductsByCategory = (category) => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return [];
+    
+    return inventoryManager.products.filter(product => 
+        (product.category || '').toLowerCase() === category.toLowerCase()
+    );
+};
+
+// Calculate total inventory value function
+window.getTotalInventoryValue = () => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return 0;
+    
+    return inventoryManager.products.reduce((total, product) => {
+        const price = parseFloat(product.price || 0);
+        const stock = parseInt(product.stock || 0);
+        return total + (price * stock);
+    }, 0);
+};
+
+// Calculate total revenue from sales function
+window.getTotalSalesRevenue = () => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return 0;
+    
+    return Object.values(inventoryManager.salesData).reduce((total, sales) => {
+        return total + (sales.totalRevenue || 0);
+    }, 0);
+};
+
+// Get inventory statistics function
+window.getInventoryStatistics = () => {
+    const inventoryManager = window.inventoryManager;
+    if (!inventoryManager) return null;
+    
+    const totalProducts = inventoryManager.products.length;
+    const totalValue = window.getTotalInventoryValue();
+    const totalRevenue = window.getTotalSalesRevenue();
+    const lowStockProducts = window.getLowStockProducts().length;
+    const outOfStockProducts = inventoryManager.products.filter(p => parseInt(p.stock || 0) === 0).length;
+    
+    const totalItemsSold = Object.values(inventoryManager.salesData).reduce((total, sales) => {
+        return total + (sales.timesSold || 0);
+    }, 0);
+    
+    return {
+        totalProducts,
+        totalValue: totalValue.toFixed(2),
+        totalRevenue: totalRevenue.toFixed(2),
+        lowStockProducts,
+        outOfStockProducts,
+        totalItemsSold,
+        categories: [...new Set(inventoryManager.products.map(p => p.category || 'Uncategorized'))]
+    };
 };

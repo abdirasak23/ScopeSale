@@ -1061,6 +1061,11 @@ small-hero {
 }
 
 
+.search-bars{
+    display: none;
+}
+
+
 #the-logo{
     position: relative;
     left: 550px;

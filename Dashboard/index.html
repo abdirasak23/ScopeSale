@@ -13,6 +13,7 @@
 
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
     <link rel="stylesheet" href="dashstyle.css">
     <link rel="stylesheet" href="dash.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
@@ -20,7 +21,7 @@
     <title>Scope Sale</title>
     <style>
         .home.active {
-            background-color: rgba(68, 73, 79, 0.2);
+            background-color: rgba(26, 116, 225, 0.2);
         }
 
         .content-section {
@@ -37,7 +38,7 @@
     <div class="center">
         <div class="top">
             <div class="logo">
-                <img src="../images/logo.png" alt="Scope Sale Logo">
+                <img src="../images/logo.png" al t="Scope Sale Logo">
             </div>
 
             <div class="search-container">
@@ -66,13 +67,34 @@
 
 
         </div>
+
+
+        <!-- <div class="search-bars">
+            <div class="search-container">
+                <div class="search">
+                    <div class="icon-search">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <input class="searcher" type="text" placeholder="Search for products, brands and more" id="searchInput">
+                </div>
+
+                <div class="recommendations" id="recommendations">
+                    
+                </div>
+            </div>
+        </div> -->
+
+
+        <div class="bottom-navigator"></div>
+
+
         <div class="center-side">
             <div class="left-slides">
                 <div class="home active" data-target="home-content">
                     <i class='bxr  bx-home'></i>
                     <p>Home</p>
                 </div>
-                <div class="home active" data-target="product-content">
+                <div class="home" data-target="product-content">
                     <i class='bxr  bx-package'></i>
                     <p>Products</p>
                 </div>
@@ -237,65 +259,159 @@
             </div>
 
 
-            <div class="content-section product-manager active " id="product-content">
+            <div class="content-section product-manager" id="product-content">
 
                 <div class="pro-head">
                     <div class="cat-filter">
-                    <div class="filter">
-                        <select class="form-select" id="category-filter" required>
-                            <option value="">Select a category...</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="clothing">Clothing</option>
-                            <option value="food">Food</option>
-                            <option value="beverages">Beverages</option>
-                            <option value="home_appliances">Home Appliances</option>
-                            <option value="furniture">Furniture</option>
-                            <option value="beauty_health">Beauty & Health</option>
-                            <option value="sports_fitness">Sports & Fitness</option>
-                            <option value="toys_games">Toys & Games</option>
-                            <option value="books_stationery">Books & Stationery</option>
-                            <option value="automotive">Automotive</option>
-                            <option value="jewelry_accessories">Jewelry & Accessories</option>
-                            <option value="baby_products">Baby Products</option>
-                            <option value="pharmacy">Pharmacy</option>
-                            <option value="groceries">Groceries</option>
-                            <option value="pet_supplies">Pet Supplies</option>
-                            <option value="hardware_tools">Hardware & Tools</option>
-                            <option value="gardening">Gardening</option>
-                            <option value="office_supplies">Office Supplies</option>
-                            <option value="mobile_accessories">Mobile Accessories</option>
-                            <option value="computer_accessories">Computer Accessories</option>
-                            <option value="kitchenware">Kitchenware</option>
-                            <option value="cleaning_supplies">Cleaning Supplies</option>
-                            <option value="footwear">Footwear</option>
-                            <option value="art_craft">Art & Craft</option>
-                            <option value="luggage_bags">Luggage & Bags</option>
-                            <option value="digital_products">Digital Products</option>
-                            <option value="services">Services</option>
-                            <option value="construction_materials">Construction Materials</option>
-                            <option value="fabric_textiles">Fabric & Textiles</option>
-                            <option value="miscellaneous">Others</option>
+                        <div class="filter">
+                            <select class="form-select" id="category-filter" required>
+                                <option value="">Select a category...</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="food">Food</option>
+                                <option value="beverages">Beverages</option>
+                                <option value="home_appliances">Home Appliances</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="beauty_health">Beauty & Health</option>
+                                <option value="sports_fitness">Sports & Fitness</option>
+                                <option value="toys_games">Toys & Games</option>
+                                <option value="books_stationery">Books & Stationery</option>
+                                <option value="automotive">Automotive</option>
+                                <option value="jewelry_accessories">Jewelry & Accessories</option>
+                                <option value="baby_products">Baby Products</option>
+                                <option value="pharmacy">Pharmacy</option>
+                                <option value="groceries">Groceries</option>
+                                <option value="pet_supplies">Pet Supplies</option>
+                                <option value="hardware_tools">Hardware & Tools</option>
+                                <option value="gardening">Gardening</option>
+                                <option value="office_supplies">Office Supplies</option>
+                                <option value="mobile_accessories">Mobile Accessories</option>
+                                <option value="computer_accessories">Computer Accessories</option>
+                                <option value="kitchenware">Kitchenware</option>
+                                <option value="cleaning_supplies">Cleaning Supplies</option>
+                                <option value="footwear">Footwear</option>
+                                <option value="art_craft">Art & Craft</option>
+                                <option value="luggage_bags">Luggage & Bags</option>
+                                <option value="digital_products">Digital Products</option>
+                                <option value="services">Services</option>
+                                <option value="construction_materials">Construction Materials</option>
+                                <option value="fabric_textiles">Fabric & Textiles</option>
+                                <option value="miscellaneous">Others</option>
 
-                        </select>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="inven home" data-target="inventory-content">
+                        <p>Full Inventory</p>
                     </div>
                 </div>
 
-                <div class="inven home" data-target="inventory-content"><p>Full Inventory</p></div>
-                </div>
 
-
-                <div class="pro manager">
-                    <div class="product">
-                        <div class="product-info">
-                            <div class="info-left">
-                                <p class="thename">Product Name</p>
-                                <p class="category">Product Category</p>
-                            </div>
-                            <div class="info-right">
-                                <p class="price">434 /-</p>
-                                <p class="stock units-data">500 grams • In Stock</p>
+                <div class=" managers">
+                    <div class="the-product-manager">
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product">
+                            <div class="product-info">
+                                <div class="info-left">
+                                    <p class="thename">Product Name</p>
+                                    <p class="category">Product Category</p>
+                                </div>
+                                <div class="info-right">
+                                    <p class="price">434 /-</p>
+                                    <p class="stock units-data">500 grams • In Stock</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -332,6 +448,9 @@
                                 <th class="column six">
                                     <span class="head">Receipt</span>
                                 </th>
+                                <th class="column seven">
+                                    <span class="head salers">Saler</span>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -355,6 +474,11 @@
                                 <td class="column six">
                                     <a href="">
                                         <span class="data-info receipt">view</span>
+                                    </a>
+                                </td>
+                                <td class="column seven">
+                                    <a href="">
+                                        <span class="data-info receipt">the Staff/Admin Name</span>
                                     </a>
                                 </td>
                             </tr>
@@ -816,6 +940,7 @@
     <script type="module" src="business.js"></script>
     <script type="module" src="reciept.js"></script>
     <script type="module" src="inventory.js"></script>
+    <script type="module" src="export.js"></script>
 
     <script src="search.js"></script>
 </body>
