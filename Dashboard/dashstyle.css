@@ -111,9 +111,10 @@
 
 
     .center-side {
-        background-color: green;
+        /* background-color: green; */
         position: absolute;
         left: 0px;
+        overflow: hidden;
         /* display: none; */
     }
 
@@ -323,7 +324,7 @@
     }
 
 
- 
+
 
     .form-select option {
         padding: 2px 6px;
@@ -335,7 +336,7 @@
     }
 
 
-    #unit-amount{
+    #unit-amount {
         position: relative;
         left: 20px;
     }
@@ -343,54 +344,784 @@
 
 
 
-    .submit-btn{
+    .submit-btn {
         position: absolute;
         left: 55px;
     }
 
 
-    .cart-section{
-        background-color: rgb(137, 135, 135);
+    .cart-section {
+        /* background-color: rgb(137, 135, 135); */
         position: absolute;
         left: 0px;
+        height: 750px;
     }
 
-    .cart-product{
-        background-color: green;
+    .cart-product {
+        /* background-color: green; */
         position: relative;
         left: 10px;
-        height: 50px;
-        width: 220px;
+        height: 80px;
+        width: 380px;
     }
 
-    .cart-left{
-        background-color: blue;
+    .cart-left {
+        /* background-color: blue; */
     }
 
 
-    .cart-name{
-        font-size: 16px;
+    .cart-name {
+        font-size: 20px;
     }
 
-    .cart-right{
-        background-color: red;
+    .cart-right {
+        /* background-color: red; */
         position: absolute;
-        right: 0px;
+        right: 10px;
     }
 
 
-    .quantity{
-        background-color: aqua;
-        height: 30px;
+
+    .bottom-cart {
+        position: absolute;
+        bottom: 80px;
+        left: 0px;
+
+    }
+
+    .last {
+        position: relative;
+        left: 10px;
+        width: 380px;
+    }
+
+
+    .total {
+        width: 120px;
+    }
+
+    .total p {
+        font-size: 18px;
+        position: relative;
+        top: -5px;
+    }
+
+
+    .sell {
+        width: 100px;
+        position: absolute;
+        right: 10px;
+
+    }
+
+    .payment {
+        width: 110px;
+    }
+
+
+    .plus {
+        position: relative;
+        left: 24px;
+
+    }
+
+    .head-top {
+        /* background-color: blue; */
+        display: flex;
+        align-items: start;
+    }
+
+    #orders-content {
+        position: absolute;
+        left: 0px !important;
+        /* background-color: blue; */
+    }
+#orders-content {
+    position: absolute;
+    left: 240px;
+}
+
+.content-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.head-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.checked {
+    color: #007bff;
+    font-weight: 500;
+}
+
+.delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete:hover {
+    background-color: #c82333;
+}
+
+.exports {
+    /* background-color: #28a745; */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.exports p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* .exports:hover {
+    background-color: #218838;
+} */
+
+.the-order {
+    overflow-x: auto;
+}
+
+.orders {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    /* border: 1px solid black; */
+    /* border-bottom: 1px solid black; */
+}
+
+.orders th,
+.orders td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.orders th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.orders tr:hover {
+    background-color: #f8f9fa;
+}
+
+.orders tr.data:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.orders tr.data:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.head {
+    margin: 0;
+    font-weight: 600;
+    color: #495057;
+}
+
+.data-info {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.data-info.date {
+    color: #007bff;
+    font-weight: 500;
+}
+
+.data-info.receipt {
+    color: #28a745;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.data-info.receipt:hover {
+    color: #1e7e34;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    accent-color: #007bff;
+}
+
+.column.one {
+    width: 120px;
+}
+
+.column.two {
+    width: 150px;
+}
+
+.column.three {
+    width: 120px;
+}
+
+.column.four {
+    width: 100px;
+}
+
+.column.five {
+    width: 130px;
+}
+
+.column.six {
+    width: 100px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Mobile Responsive Styles */
+@media only screen and (max-width: 480px) {
+    #orders-content {
+        position: static;
+        left: 0;
+        padding: 10px;
+    }
+    
+    .content-section {
+        margin: 0;
+        border-radius: 4px;
+    }
+    
+    .head-top {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 10px 15px;
+    }
+    
+    .head-top > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .delete, .exports {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .the-order {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .orders {
+        min-width: 600px;
+        font-size: 12px;
+    }
+    
+    .orders th,
+    .orders td {
+        padding: 8px 6px;
+        white-space: nowrap;
+    }
+    
+    .orders th {
+        font-size: 11px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    .head {
+        font-size: 11px;
+        font-weight: 600;
+    }
+    
+    .data-info {
+        font-size: 11px;
+    }
+    
+    .column.one {
+        width: 80px;
+    }
+    
+    .column.two {
+        width: 100px;
+    }
+    
+    .column.three {
+        width: 80px;
+    }
+    
+    .column.four {
+        width: 70px;
+    }
+    
+    .column.five {
+        width: 90px;
+    }
+    
+    .column.six {
         width: 60px;
-        position: relative;
-        bottom: 10px;
     }
+    
+    .column.seven {
+        width: 120px;
+    }
+    
+    input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+    }
+    
+    /* Alternative: Card-based layout for very small screens */
+    .orders-mobile-cards {
+        display: none;
+    }
+}
+
+/* Alternative card layout for extremely small screens */
+@media only screen and (max-width: 320px) {
+    .orders {
+        display: none;
+    }
+    
+    .orders-mobile-cards {
+        display: block;
+    }
+    
+    .order-card {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    
+    .order-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .order-card-body {
+        font-size: 12px;
+    }
+    
+    .order-card-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+    }
+    
+    .order-card-label {
+        font-weight: 600;
+        color: #495057;
+    }
+    
+    .order-card-value {
+        color: #6c757d;
+    }
+}
 
 
-    .plus{
-        position: relative;
-        left:10px;
+#orders-content {
+    position: absolute;
+    left: 240px;
+}
+
+.content-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.head-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+}
+
+.checked {
+    color: #007bff;
+    font-weight: 500;
+    background-color: red;
+
+}
+
+.delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    left: 0px !important;
+
+}
+
+.delete:hover {
+    background-color: #c82333;
+}
+
+.exports {
+    background-color: transparent;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    right: 40px;
+    background-color: transparent;
+}
+
+.exports p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* .exports:hover {
+    background-color: #218838;
+} */
+
+.the-order {
+    overflow-x: auto;
+}
+
+.orders {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    /* border: 1px solid black; */
+    /* border-bottom: 1px solid black; */
+}
+
+.orders th,
+.orders td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.orders th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.orders tr:hover {
+    background-color: #f8f9fa;
+}
+
+.orders tr.data:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.orders tr.data:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.head {
+    margin: 0;
+    font-weight: 600;
+    color: #495057;
+}
+
+.data-info {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.data-info.date {
+    color: #007bff;
+    font-weight: 500;
+}
+
+.data-info.receipt {
+    color: #28a745;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.data-info.receipt:hover {
+    color: #1e7e34;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    accent-color: #007bff;
+}
+
+.column.one {
+    width: 120px;
+}
+
+.column.two {
+    width: 150px;
+}
+
+.column.three {
+    width: 120px;
+}
+
+.column.four {
+    width: 100px;
+}
+
+.column.five {
+    width: 130px;
+}
+
+.column.six {
+    width: 100px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Mobile Responsive Styles */
+@media only screen and (max-width: 480px) {
+    #orders-content {
+        position: static;
+        left: 0;
+        margin: 10px;
+        width: calc(100% - 20px);
     }
+    
+    .content-section {
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    
+    /* Standard Header Layout for Mobile */
+    .head-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+        flex-wrap: nowrap;
+        min-height: 50px;
+    }
+    
+    .head-top .checked {
+        font-size: 13px;
+        flex-shrink: 0;
+        margin-right: 8px;
+        display: none;
+    }
+    
+    .delete {
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: 4px;
+        flex-shrink: 0;
+        margin-right: 8px;
+        display: none;
+        position: relative;
+        left: 50px;
+        width: 80px;
+    }
+    
+    .exports {
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: 4px;
+        flex-shrink: 0;
+        background-color: #28a745;
+    }
+    
+    .exports:hover {
+        background-color: #218838;
+    }
+    
+    .exports p {
+        margin: 0;
+        font-size: 12px;
+        color: white;
+    }
+    
+    /* Table Container with Horizontal Scroll */
+    .the-order {
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: #c1c1c1 #f1f1f1;
+    }
+    
+    /* Custom scrollbar for webkit browsers */
+    .the-order::-webkit-scrollbar {
+        height: 6px;
+    }
+    
+    .the-order::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+    }
+    
+    .the-order::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+    }
+    
+    .the-order::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+    
+    /* Table Optimization for Mobile */
+    .orders {
+        min-width: 700px; /* Ensures table maintains readable width */
+        font-size: 13px;
+        border-collapse: collapse;
+    }
+    
+    .orders th,
+    .orders td {
+        padding: 10px 8px;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+    
+    .orders th {
+        font-size: 12px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: #f8f9fa;
+    }
+    
+    .head {
+        font-size: 12px;
+        font-weight: 600;
+        display: block;
+    }
+    
+    .data-info {
+        font-size: 12px;
+        display: block;
+    }
+    
+    /* Optimized Column Widths for Mobile */
+    .column.one {
+        width: 90px;
+        min-width: 90px;
+    }
+    
+    .column.two {
+        width: 110px;
+        min-width: 110px;
+    }
+    
+    .column.three {
+        width: 85px;
+        min-width: 85px;
+    }
+    
+    .column.four {
+        width: 75px;
+        min-width: 75px;
+    }
+    
+    .column.five {
+        width: 95px;
+        min-width: 95px;
+    }
+    
+    .column.six {
+        width: 65px;
+        min-width: 65px;
+    }
+    
+    .column.seven {
+        width: 140px;
+        min-width: 140px;
+    }
+    
+    input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+        margin-right: 6px;
+    }
+    
+    /* Ensure links and buttons remain clickable */
+    .data-info.receipt {
+        padding: 2px 4px;
+        border-radius: 2px;
+        display: inline-block;
+    }
+}
+
+/* Additional responsiveness for very small screens */
+@media only screen and (max-width: 360px) {
+    #orders-content {
+        margin: 5px;
+        width: calc(100% - 10px);
+    }
+    
+    .head-top {
+        padding: 10px 12px;
+    }
+    
+    .checked {
+        font-size: 12px;
+    }
+    
+    .delete, .exports {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .orders {
+        font-size: 12px;
+        min-width: 650px;
+    }
+    
+    .orders th,
+    .orders td {
+        padding: 8px 6px;
+    }
+    
+    .head, .data-info {
+        font-size: 11px;
+    }
+}
+
 
 }

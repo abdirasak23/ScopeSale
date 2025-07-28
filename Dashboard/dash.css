@@ -264,7 +264,7 @@ width: 350px;
 }
 
 
-.staff-info{
+.staff-info {
     overflow-y: auto;
     height: 100%;
 }
@@ -326,7 +326,7 @@ width: 350px;
 }
 
 
-.staff-name{
+.staff-name {
     font-size: 20px;
     position: relative;
     bottom: 10px;
@@ -337,7 +337,7 @@ width: 350px;
 }
 
 
-.staff-full{
+.staff-full {
     height: 50px;
     width: 800px;
     /* background-color: green; */
@@ -347,7 +347,7 @@ width: 350px;
     display: flex;
 }
 
-.the-staff-name{
+.the-staff-name {
     position: relative;
     left: 5px;
     font-size: 18px;
@@ -357,19 +357,19 @@ width: 350px;
 }
 
 
-.email-staff{
+.email-staff {
     position: relative;
     left: 80px;
 }
 
 
-.the-staff-email{
+.the-staff-email {
     position: absolute;
     left: 190px;
     top: -3px;
 }
 
-.action{
+.action {
     height: 40px;
     width: 100px;
     position: absolute;
@@ -384,7 +384,7 @@ width: 350px;
     cursor: pointer;
 }
 
-.add-new{
+.add-new {
     height: 40px;
     width: 100px;
     position: absolute;
@@ -400,7 +400,7 @@ width: 350px;
 }
 
 
-.staff-head .add-new{
+.staff-head .add-new {
     height: 40px;
     width: 100px;
     position: absolute;
@@ -418,17 +418,17 @@ width: 350px;
 .action:hover,
 .action:focus {
     background-color: #b30000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     outline: none;
 }
 
 
 
-.staff-name{
+.staff-name {
     cursor: pointer;
 }
 
-.business-pro{
+.business-pro {
     position: absolute;
     left: -5px;
     top: 320px;
@@ -436,18 +436,18 @@ width: 350px;
     max-width: 900px;
 }
 
-.business-product{
+.business-product {
     /* background-color: grey; */
     height: 300px;
     width: 850px;
     position: relative;
     top: 80px;
     /* overflow: auto; */
-    
+
 }
 
 
-.business-product-cont{
+.business-product-cont {
     height: 80px;
     margin-top: 10px;
     width: 600px;
@@ -457,7 +457,7 @@ width: 350px;
 }
 
 
-.product-details-bus{
+.product-details-bus {
     height: 80px;
     width: 240px;
     /* background-color: gold; */
@@ -465,7 +465,7 @@ width: 350px;
 }
 
 
-.bus-pro-name{
+.bus-pro-name {
     font-size: 20px;
     font-weight: 500;
     position: relative;
@@ -475,7 +475,7 @@ width: 350px;
 
 
 
-.bus-pro-category{
+.bus-pro-category {
     position: relative;
     left: 10px;
     font-size: 18px;
@@ -484,7 +484,7 @@ width: 350px;
 }
 
 
-.stock-info{
+.stock-info {
     font-size: 18px;
     position: absolute;
     right: 20px;
@@ -493,9 +493,9 @@ width: 350px;
 }
 
 
-.inc-dec{
+.inc-dec {
     height: 80px;
-    width:180px;
+    width: 180px;
     /* background-color: green; */
     position: abs;
     left: 100px;
@@ -505,7 +505,7 @@ width: 350px;
 }
 
 
-.inc{
+.inc {
     height: 40px;
     width: 80px;
     background-color: rgb(239, 239, 239);
@@ -516,19 +516,19 @@ width: 350px;
     border: 1px solid rgba(0, 0, 0, 0.589);
 }
 
-.inc i{
+.inc i {
     font-size: 20px;
     top: 10px;
     position: relative;
 }
 
 
-.bus-nav{
+.bus-nav {
     cursor: pointer;
 }
 
 
-.add-new{
+.add-new {
     position: absolute;
     background-color: blue;
 }
@@ -537,43 +537,43 @@ width: 350px;
 /* work */
 
 
-.email-staff{
+.email-staff {
     /* background-color: red; */
     position: relative;
     left: 140px;
 }
 
 
-.role-staff{
+.role-staff {
     /* background-color: yellow; */
     position: relative;
     left: 335px;
 }
 
 
-.the-staff-role{
+.the-staff-role {
     position: absolute;
     left: 220px;
-    
+
 }
 
 
-.much-details{
+.much-details {
     /* background-color: green; */
     width: 250px;
     position: relative;
     left: 60px;
     display: block;
-    
+
 }
 
-.business-address{
+.business-address {
     position: relative;
     top: 5px;
 }
 
 
-.business-num{
+.business-num {
     position: relative;
     top: 85px;
     height: 0px;
@@ -581,7 +581,7 @@ width: 350px;
 }
 
 
-.bus-em{
+.bus-em {
     position: relative;
     background-color: red;
     height: 0px;
@@ -591,202 +591,202 @@ width: 350px;
 
 
 
-#orders-content{
+#orders-content {
     position: absolute;
     left: 240px;
 }
 
 
 .content-section {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 
-        .head-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
+.head-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
 
-        .checked {
-            color: #007bff;
-            font-weight: 500;
-        }
+.checked {
+    color: #007bff;
+    font-weight: 500;
+}
 
-        .delete {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+.delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
-        .delete:hover {
-            background-color: #c82333;
-        }
+.delete:hover {
+    background-color: #c82333;
+}
 
-        .exports {
-            /* background-color: #28a745; */
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+.exports {
+    /* background-color: #28a745; */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        .exports p {
-            margin: 0;
-            font-size: 14px;
-        }
+.exports p {
+    margin: 0;
+    font-size: 14px;
+}
 
-        /* .exports:hover {
+/* .exports:hover {
             background-color: #218838;
         } */
 
-        .the-order {
-            overflow-x: auto;
-        }
+.the-order {
+    overflow-x: auto;
+}
 
-        .orders {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-            /* border: 1px solid black; */
-            /* border-bottom: 1px solid black; */
-        }
+.orders {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    /* border: 1px solid black; */
+    /* border-bottom: 1px solid black; */
+}
 
-        .orders th,
-        .orders td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e9ecef;
-        }
+.orders th,
+.orders td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
 
-        .orders th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            color: #495057;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+.orders th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 
-        .orders tr:hover {
-            background-color: #f8f9fa;
-        }
+.orders tr:hover {
+    background-color: #f8f9fa;
+}
 
-        .orders tr.data:nth-child(even) {
-            background-color: #ffffff;
-        }
+.orders tr.data:nth-child(even) {
+    background-color: #ffffff;
+}
 
-        .orders tr.data:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
+.orders tr.data:nth-child(odd) {
+    background-color: #f9f9f9;
+}
 
-        .head {
-            margin: 0;
-            font-weight: 600;
-            color: #495057;
-        }
+.head {
+    margin: 0;
+    font-weight: 600;
+    color: #495057;
+}
 
-        .data-info {
-            margin: 0;
-            color: #6c757d;
-            font-size: 14px;
-        }
+.data-info {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+}
 
-        .data-info.date {
-            color: #007bff;
-            font-weight: 500;
-        }
+.data-info.date {
+    color: #007bff;
+    font-weight: 500;
+}
 
-        .data-info.receipt {
-            color: #28a745;
-            text-decoration: underline;
-            cursor: pointer;
-        }
+.data-info.receipt {
+    color: #28a745;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
-        .data-info.receipt:hover {
-            color: #1e7e34;
-        }
+.data-info.receipt:hover {
+    color: #1e7e34;
+}
 
-        input[type="checkbox"] {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-            accent-color: #007bff;
-        }
+input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    accent-color: #007bff;
+}
 
-        .column.one {
-            width: 120px;
-        }
+.column.one {
+    width: 120px;
+}
 
-        .column.two {
-            width: 150px;
-        }
+.column.two {
+    width: 150px;
+}
 
-        .column.three {
-            width: 120px;
-        }
+.column.three {
+    width: 120px;
+}
 
-        .column.four {
-            width: 100px;
-        }
+.column.four {
+    width: 100px;
+}
 
-        .column.five {
-            width: 130px;
-        }
+.column.five {
+    width: 130px;
+}
 
-        .column.six {
-            width: 100px;
-        }
+.column.six {
+    width: 100px;
+}
 
-        a {
-            text-decoration: none;
-        }
+a {
+    text-decoration: none;
+}
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .head-top {
-                flex-direction: column;
-                gap: 10px;
-                align-items: stretch;
-            }
+/* Responsive design */
+@media (max-width: 768px) {
+    .head-top {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
 
-            .head-top > * {
-                text-align: center;
-            }
+    .head-top>* {
+        text-align: center;
+    }
 
-            .orders th,
-            .orders td {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
-        }
-
-
-        .delete{
-            position: relative;
-            right: 300px;
-        }
+    .orders th,
+    .orders td {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
 
 
-        .five .date{
-            color: grey;
-        }
+.delete {
+    position: relative;
+    right: 300px;
+}
 
-        input[type="checkbox"] {
-    
-    
+
+.five .date {
+    color: grey;
+}
+
+input[type="checkbox"] {
+
+
     background-color: blue;
     position: relative;
-    
+
     top: 0px;
     accent-color: rgb(35, 26, 120);
 }
@@ -797,13 +797,13 @@ width: 350px;
 
 
 
-.units-data{
+.units-data {
     /* background-color: red; */
     width: 160px;
 }
 
 
-.inven{
+.inven {
     height: 50px;
     width: 200px;
     background-color: rgb(42, 120, 254);
@@ -820,17 +820,17 @@ width: 350px;
 }
 
 
-.inven p{
+.inven p {
     position: relative;
     text-align: center;
     left: 40px;
     top: -2px;
-    
+
 }
 
 
 
-.managers{
+.managers {
 
     height: 500px;
     width: 860px;
@@ -843,18 +843,18 @@ width: 350px;
 }
 
 
-.the-product-manager{
+.the-product-manager {
     display: grid;
     height: 40px;
     gap: 10px;
     position: relative;
     top: 5px;
     /* overflow: hidden; */
-    grid-template-columns: repeat(2,auto);
-    
+    grid-template-columns: repeat(2, auto);
+
 }
 
 
-.seven span{
+.seven span {
     color: grey;
 }
