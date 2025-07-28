@@ -86,7 +86,21 @@
         </div> -->
 
 
-        <div class="bottom-navigator"></div>
+        <div class="navigator">
+            <div class="naves" data-target="home-content"><i class='bxr  bx-home-alt-3'></i>
+            <p>Home</p> 
+            </div>
+            <div class="naves" data-target="product-content"><i class='bxr  bx-package'  ></i>  
+            <p>Products</p>
+            </div>
+            <div class="naves add-btn" data-target="black-content"><i class='bxr  bx-plus-circle'></i>  </div>
+            <div class="naves" data-target="orders-content"><i class='bxr  bx-shopping-bag-alt'  ></i> 
+            <p>Orders</p>
+            </div>
+            <div class="naves" data-target="cart-content"><i class='bxr  bx-cart'  ></i> 
+            <p>Cart</p>
+            </div>
+        </div>
 
 
         <div class="center-side">
@@ -262,7 +276,7 @@
 
             <div class="content-section product-manager" id="product-content">
 
-                <div class="pro-head">
+                <div class="pro-head " id="big-head">
                     <div class="cat-filter">
                         <div class="filter">
                             <select class="form-select" id="category-filter" required>
@@ -905,7 +919,7 @@
     </div>
     </div>
     <script>
-        const navItems = document.querySelectorAll('.home[data-target]');
+        const navItems = document.querySelectorAll('.home, .naves[data-target]');
         const contentSections = document.querySelectorAll('.content-section');
 
         navItems.forEach(item => {

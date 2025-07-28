@@ -721,7 +721,7 @@ class CartManager {
     // Attach cart-related DOM events
     attachCartEvents() {
         // Handle cart icon click to display cart content
-        const cartIcon = document.querySelector('.cart[data-target="cart-content"]');
+        const cartIcon = document.querySelector('.cart, .naves[data-target="cart-content"]');
         if (cartIcon) {
             cartIcon.addEventListener('click', async () => {
                 await this.renderCart();

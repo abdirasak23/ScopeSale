@@ -39,36 +39,38 @@
 
 
 
-.bottom-navigator{
+.navigator {
     display: none;
 }
 
 
 
 @media only screen and (max-width: 480px) {
-    body{
+    body {
         margin: 0;
         padding: 0;
         overflow: hidden;
     }
 
-    *{
-        overflow: hidden;
-    }
 
-    .top{
-        background-color: grey;
-        height: 100px;
+
+
+
+
+    .top {
+        /* background-color: grey; */
+        height: 110px;
         display: block;
+        width: 100%;
     }
 
 
-    .cart{
+    .cart {
         display: none;
     }
 
-    .logo{
-        width: 240px;
+    .logo {
+        width: 150px;
         height: 25px;
         /* background-color: red; */
         position: relative;
@@ -76,13 +78,319 @@
     }
 
 
-    
+    .search-container {
+        position: relative;
+        top: 30px;
+        left: 10px;
+        /* background-color: blue; */
+    }
+
+    .search {
+        /* background-color: red; */
+        width: 320px;
+        position: relative;
+        left: 40px;
+    }
+
+    .search input {
+        width: 260px;
+        /* background-color: red; */
+        height: 30px;
+        position: relative;
+        top: 5px;
+        font-size: 14px;
+    }
 
 
-    
+    .recommendations {
+        width: 320px;
+        position: relative;
+        left: 40px;
+    }
 
 
-   
 
+    .center-side {
+        background-color: green;
+        position: absolute;
+        left: 0px;
+        /* display: none; */
+    }
+
+    .left-slides {
+        display: none;
+    }
+
+
+    .navigator {
+        height: 80px;
+        width: 100%;
+        background-color: rgb(235, 237, 235);
+        position: fixed;
+        bottom: 0px;
+        z-index: 1000;
+        display: flex;
+        gap: 20px;
+    }
+
+
+    .naves {
+        height: 60px;
+        width: 60px;
+        display: block;
+        /* background-color: rgba(82, 85, 177, 0.397); */
+    }
+
+    .naves {
+
+        text-align: center;
+        position: relative;
+        left: 10px;
+        top: 10px;
+        border-radius: 5px;
+
+
+    }
+
+    .naves i {
+        font-size: 30px;
+        position: relative;
+        top: 4px;
+        color: rgb(27, 30, 213);
+    }
+
+
+    .naves p {
+        font-size: 20px;
+        position: relative;
+        bottom: 20px;
+        font-weight: 300;
+        color: rgb(69, 69, 69);
+    }
+
+    .add-btn {
+        background-color: rgba(45, 56, 174, 0.728);
+        border-radius: 100%;
+        margin-bottom: 50px;
+        height: 70px;
+        width: 70px;
+        align-self: flex-end;
+    }
+
+    .add-btn i {
+        font-size: 38px;
+        position: relative;
+        top: 15px;
+        color: white;
+    }
+
+
+
+    .content {
+        /* background-color: red; */
+        width: 410px;
+        height: 800px;
+    }
+
+    .home-display {
+        /* background-color: red; */
+        /* display: block; */
+        height: 480px;
+        width: 100%;
+        /* overflow: hidden; */
+    }
+
+
+    .revenue {
+        width: 360px;
+    }
+
+    .number {
+        font-size: 38px;
+        position: relative;
+        bottom: 10px;
+        left: 25px;
+    }
+
+
+    .saler {
+        display: block;
+    }
+
+    .sale {
+        margin-top: 20px;
+        width: 360px;
+    }
+
+    .chart-pay {
+        /* background-color: blue; */
+        position: relative;
+        top: 230px;
+        width: 320px;
+        display: block;
+    }
+
+    .payment-option {
+        margin-top: 20px;
+        position: relative;
+        left: 20px;
+    }
+
+    #product-content {
+        background-color: grey;
+
+    }
+
+
+
+
+
+    .pro-head {
+        background-color: blue;
+        position: absolute;
+        left: 0px !important;
+        top: 0px;
+        height: 60px;
+        width: 300px !important;
+    }
+
+    #big-head {
+        position: absolute;
+        left: 10px !important;
+        display: block;
+    }
+
+    .managers {
+        position: absolute;
+        left: 10px !important;
+        background-color: grey;
+        top: 20px;
+        width: 380px !important;
+    }
+
+
+    .cat-filter {
+        width: 150px;
+        position: absolute;
+
+    }
+
+
+    .the-product-manager {
+        display: block;
+        background-color: green;
+    }
+
+
+    .add {
+        display: block;
+        /* background-color: grey; */
+        position: relative;
+        left: 0px;
+        width: 420px;
+    }
+
+
+    #black-content {
+        position: absolute;
+        left: 0px;
+        /* background-color: red; */
+    }
+
+    #productForm {
+        display: block;
+    }
+
+    .form-title {
+        position: relative;
+        left: 10px;
+    }
+
+
+
+    .form-group {
+        width: 300px;
+        position: relative;
+        left: 20px;
+        bottom: 20px;
+    }
+
+
+
+    #prices {
+        position: relative;
+        left: 20px;
+    }
+
+
+ 
+
+    .form-select option {
+        padding: 2px 6px;
+        /* some browsers respect option padding */
+        line-height: 1.2;
+        /* controls the vertical height of each option */
+        font-size: 14px;
+        /* match the select’s text size */
+    }
+
+
+    #unit-amount{
+        position: relative;
+        left: 20px;
+    }
+
+
+
+
+    .submit-btn{
+        position: absolute;
+        left: 55px;
+    }
+
+
+    .cart-section{
+        background-color: rgb(137, 135, 135);
+        position: absolute;
+        left: 0px;
+    }
+
+    .cart-product{
+        background-color: green;
+        position: relative;
+        left: 10px;
+        height: 50px;
+        width: 220px;
+    }
+
+    .cart-left{
+        background-color: blue;
+    }
+
+
+    .cart-name{
+        font-size: 16px;
+    }
+
+    .cart-right{
+        background-color: red;
+        position: absolute;
+        right: 0px;
+    }
+
+
+    .quantity{
+        background-color: aqua;
+        height: 30px;
+        width: 60px;
+        position: relative;
+        bottom: 10px;
+    }
+
+
+    .plus{
+        position: relative;
+        left:10px;
+    }
 
 }
