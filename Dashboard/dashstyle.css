@@ -278,20 +278,20 @@
         overflow: auto !important;
     }
 
-    .column input{
+    .column input {
         display: none;
     }
 
 
-    .pro-head{
+    .pro-head {
         overflow: hidden;
-        width: 100%  !important;
+        width: 100% !important;
         height: 60px;
         display: flex;
     }
 
 
-    .cat-filter{
+    .cat-filter {
         /* overflow: hidden; */
         position: absolute;
         left: 10px !important;
@@ -300,16 +300,16 @@
     }
 
 
-    .inven{
+    .inven {
         position: absolute;
         left: 235px !important;
         width: 100px !important;
         top: -8px !important;
-    
+
     }
 
 
-    .inven p{
+    .inven p {
         font-size: 16px;
         position: absolute;
         margin: 0px 0px 0px -20px;
@@ -423,8 +423,15 @@
         /* background-color: rgb(137, 135, 135); */
         position: absolute;
         left: 0px;
-        height: 100%;
-        overflow: visible;
+        height: 400px !important;
+        overflow-y: auto;
+        display: block;
+    }
+
+    .the-cart-product{
+        height: 360px;
+        /* background-color: red; */
+        overflow: auto;
     }
 
     .cart-product {
@@ -437,9 +444,7 @@
 
 
 
-    .cart-left {
-        /* background-color: blue; */
-    }
+    
 
 
     .cart-name {

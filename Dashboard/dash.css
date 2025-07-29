@@ -825,13 +825,11 @@ input[type="checkbox"] {
     text-align: center;
     left: 40px;
     top: -2px;
-
 }
 
 
 
 .managers {
-
     height: 500px;
     width: 860px;
     /* background-color: rgb(0, 64, 128); */

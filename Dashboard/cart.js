@@ -4,6 +4,7 @@ class CartManager {
         this.cartKey = 'shopping_cart';
         this.cart = this.loadCartFromStorage();
         this.attachCartEvents();
+        this.attachNavigationEvents(); // Add this new method
         this.initializePopupStyles();
     }
 
@@ -718,16 +719,48 @@ class CartManager {
         }
     }
 
+    // NEW METHOD: Attach navigation events for both desktop and mobile
+    attachNavigationEvents() {
+        // Handle both desktop and mobile navigation clicks that target cart content
+        const cartNavItems = document.querySelectorAll('[data-target="cart-content"]');
+        
+        cartNavItems.forEach(navItem => {
+            navItem.addEventListener('click', async (e) => {
+                console.log('Cart navigation clicked:', navItem.className);
+                
+                // Small delay to ensure content section is visible
+                setTimeout(async () => {
+                    const cartContentSection = document.getElementById('cart-content');
+                    if (cartContentSection && cartContentSection.classList.contains('active')) {
+                        console.log('Cart content section is active, rendering cart...');
+                        await this.renderCart();
+                    }
+                }, 100);
+            });
+        });
+
+        // Also listen for the existing navigation script that switches between sections
+        const observer = new MutationObserver(async (mutations) => {
+            mutations.forEach(async (mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.id === 'cart-content' && target.classList.contains('active')) {
+                        console.log('Cart section became active, rendering cart...');
+                        await this.renderCart();
+                    }
+                }
+            });
+        });
+
+        // Observe the cart content section for class changes
+        const cartContentSection = document.getElementById('cart-content');
+        if (cartContentSection) {
+            observer.observe(cartContentSection, { attributes: true });
+        }
+    }
+
     // Attach cart-related DOM events
     attachCartEvents() {
-        // Handle cart icon click to display cart content
-        const cartIcon = document.querySelector('.cart, .naves[data-target="cart-content"]');
-        if (cartIcon) {
-            cartIcon.addEventListener('click', async () => {
-                await this.renderCart();
-            });
-        }
-        
         // Event delegation for cart controls
         document.addEventListener('click', async (e) => {
             const cartSection = document.querySelector('.cart-section');
@@ -800,8 +833,12 @@ class CartManager {
 
     // Render cart items in the cart container
     async renderCart() {
+        console.log('Rendering cart...');
         const cartSection = document.querySelector('.cart-section');
-        if (!cartSection) return;
+        if (!cartSection) {
+            console.log('Cart section not found');
+            return;
+        }
         
         // Remove existing cart products
         const existingProducts = cartSection.querySelectorAll('.cart-product');
@@ -809,6 +846,7 @@ class CartManager {
         
         // Get cart items
         const cartItems = this.getCartItems();
+        console.log('Cart items:', cartItems);
         
         if (cartItems.length === 0) {
             // Show empty cart state
@@ -816,6 +854,18 @@ class CartManager {
             if (bottomCart) {
                 bottomCart.style.display = 'none';
             }
+            
+            // Add empty cart message
+            const emptyMessage = document.createElement('div');
+            emptyMessage.className = 'cart-product empty-cart-message';
+            emptyMessage.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: #666;">
+                    <i class='bx bx-cart' style="font-size: 48px; margin-bottom: 10px;"></i>
+                    <p>Your cart is empty</p>
+                    <p>Add some products to get started!</p>
+                </div>
+            `;
+            cartSection.insertBefore(emptyMessage, cartSection.querySelector('.bottom-cart'));
             return;
         }
         
@@ -876,6 +926,8 @@ class CartManager {
         if (totalElement) {
             totalElement.textContent = `Total: ₹${total}/-`;
         }
+        
+        console.log('Cart rendered successfully with', cartItems.length, 'items, total: ₹', total);
     }
 
     // Show message to user
@@ -956,6 +1008,13 @@ fadeAnimationStyle.textContent = `
         10% { opacity: 1; transform: translateX(0); }
         90% { opacity: 1; transform: translateX(0); }
         100% { opacity: 0; transform: translateX(100%); }
+    }
+    
+    .empty-cart-message {
+        background: #f8f9fa;
+        border: 2px dashed #dee2e6;
+        border-radius: 10px;
+        margin: 10px 0;
     }
 `;
 document.head.appendChild(fadeAnimationStyle);
