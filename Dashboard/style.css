@@ -456,7 +456,7 @@ body {
     color: #667eea;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     .lists {
         padding: 30px 20px;
         margin: 10px;
@@ -465,7 +465,7 @@ body {
     .form-title {
         font-size: 24px;
     }
-}
+} */
 
 
 .cart-section {
@@ -494,7 +494,7 @@ body {
     left: 120px;
     top: 10px;
     border-radius: 10px;
-    overflow: auto;
+    /* overflow: auto; */
     border: 1px solid black;
     display: flex;
 }
@@ -1027,6 +1027,7 @@ body {
 
 
 /* work */
+
 
 
 

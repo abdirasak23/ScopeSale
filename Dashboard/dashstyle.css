@@ -167,10 +167,10 @@
 
 
     .naves p {
-        font-size: 20px;
+        font-size: 16px;
         position: relative;
-        bottom: 25px;
-        font-weight: 300;
+        bottom: 15px;
+        font-weight: 200;
         color: rgb(69, 69, 69);
     }
 
@@ -423,16 +423,23 @@
         /* background-color: rgb(137, 135, 135); */
         position: absolute;
         left: 0px;
-        height: 400px !important;
-        overflow-y: auto;
+        height: 340px !important;
         display: block;
-    }
-
-    .the-cart-product{
-        height: 360px;
-        /* background-color: red; */
         overflow: auto;
     }
+
+
+    
+
+
+    .cart-products-area {
+        display: flex;
+        background-color: red;
+        height: 600px;
+    }
+
+
+
 
     .cart-product {
         /* background-color: green; */
@@ -444,7 +451,7 @@
 
 
 
-    
+
 
 
     .cart-name {
@@ -457,9 +464,9 @@
         right: 10px;
     }
 
-    #the-cart {
+    /* #the-cart {
         overflow: hidden !important;
-    }
+    } */
 
 
 
@@ -529,7 +536,7 @@
         background: white;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        /* overflow: hidden; */
     }
 
     .head-top {
