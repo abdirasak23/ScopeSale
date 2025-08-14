@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Scopesale</title>
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --dark: #14213d;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border: #e9ecef;
+            --success: #2ec4b6;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit' ;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f0f4f8;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f7ff 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+
+        .effective-date {
+            display: inline-block;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(67, 97, 238, 0.2);
+        }
+
+        /* Main Content Layout */
+        .policy-container {
+            display: flex;
+            gap: 30px;
+            padding: 2rem 0 4rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            flex: 0 0 280px;
+            align-self: flex-start;
+            position: sticky;
+            top: 100px;
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .toc h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            color: var(--primary);
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.7rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+        }
+
+        .toc a:hover {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .toc a i {
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .toc a.active {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            font-weight: 600;
+        }
+
+        /* Policy Content */
+        .policy-content {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section h2 i {
+            background: rgba(67, 97, 238, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .info-box {
+            background: rgba(67, 97, 238, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .data-table th {
+            background: rgba(67, 97, 238, 0.1);
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:nth-child(even) {
+            background: rgba(67, 97, 238, 0.03);
+        }
+
+        .highlight {
+            background: rgba(114, 9, 183, 0.05);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            border-top: 4px solid var(--success);
+        }
+
+        .contact-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-card p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .footer-logo .logo {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 350px;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .policy-container {
+                flex-direction: column;
+            }
+            
+            .toc {
+                position: static;
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 2.5rem 0 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .policy-content {
+                padding: 1.5rem;
+            }
+            
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is important to us. This policy explains how Scopesale collects, uses, and protects your information.</p>
+            <div class="effective-date">
+                <i class="fas fa-calendar-alt"></i> Effective Date: October 15, 2023
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container policy-container">
+        <!-- Table of Contents -->
+        <aside class="toc">
+            <h3><i class="fas fa-list"></i> Contents</h3>
+            <ul>
+                <li><a href="#introduction" class="active"><i class="fas fa-chevron-right"></i> Introduction</a></li>
+                <li><a href="#information"><i class="fas fa-chevron-right"></i> Information We Collect</a></li>
+                <li><a href="#usage"><i class="fas fa-chevron-right"></i> How We Use Information</a></li>
+                <li><a href="#sharing"><i class="fas fa-chevron-right"></i> Data Sharing</a></li>
+                <li><a href="#storage"><i class="fas fa-chevron-right"></i> Data Storage & Security</a></li>
+                <li><a href="#rights"><i class="fas fa-chevron-right"></i> Your Rights</a></li>
+                <li><a href="#children"><i class="fas fa-chevron-right"></i> Children's Privacy</a></li>
+                <li><a href="#changes"><i class="fas fa-chevron-right"></i> Policy Changes</a></li>
+                <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            </ul>
+        </aside>
+
+        <!-- Policy Content -->
+        <main class="policy-content">
+            <!-- Introduction -->
+            <section id="introduction" class="section">
+                <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+                <p>Scopesale operates the Scopesale mobile application to provide businesses with point-of-sale, inventory management, and order tracking features.</p>
+                <p>We are committed to protecting your privacy and handling your data transparently. This Privacy Policy explains how we collect, use, and safeguard your information when you use our App.</p>
+                <div class="info-box">
+                    <p><i class="fas fa-lightbulb"></i> <strong>Key Principle:</strong> We only collect information necessary to provide and improve our services. We never sell your personal information to third parties.</p>
+                </div>
+            </section>
+
+            <!-- Information We Collect -->
+            <section id="information" class="section">
+                <h2><i class="fas fa-database"></i> Information We Collect</h2>
+                <p>We collect the following types of information when you use our App:</p>
+                
+                <h3>1.1 Personal Information</h3>
+                <ul class="data-table">
+                    <tr>
+                        <td>Account Information</td>
+                        <td>Name, email address, phone number (during account registration)</td>
+                    </tr>
+                    <tr>
+                        <td>Business Details</td>
+                        <td>Business name, location, contact information</td>
+                    </tr>
+                    <tr>
+                        <td>Profile Photo</td>
+                        <td>Optional profile image for your account</td>
+                    </tr>
+                </ul>
+                
+                <h3>1.2 Product & Business Data</h3>
+                <ul class="data-table">
+                    <tr>
+                        <td>Product Information</td>
+                        <td>Product names, descriptions, prices, stock availability</td>
+                    </tr>
+                    <tr>
+                        <td>Product Identification</td>
+                        <td>Barcodes and images of products</td>
+                    </tr>
+                    <tr>
+                        <td>Transaction Records</td>
+                        <td>Orders, receipts, and transaction history</td>
+                    </tr>
+                </ul>
+                
+                <h3>1.3 Device & Technical Data</h3>
+                <ul class="data-table">
+                    <tr>
+                        <td>Device Information</td>
+                        <td>Device model, operating system version</td>
+                    </tr>
+                    <tr>
+                        <td>Network Data</td>
+                        <td>IP address, app version</td>
+                    </tr>
+                    <tr>
+                        <td>Usage Analytics</td>
+                        <td>Usage logs and crash reports</td>
+                    </tr>
+                </ul>
+            </section>
+
+            <!-- How We Use Information -->
+            <section id="usage" class="section">
+                <h2><i class="fas fa-cogs"></i> How We Use Your Information</h2>
+                <p>We use your information for the following purposes:</p>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-check-circle"></i> Provide authentication and secure access to your account</p>
+                    <p><i class="fas fa-check-circle"></i> Display, add, edit, and manage your products and staff</p>
+                    <p><i class="fas fa-check-circle"></i> Process and store order and sales data</p>
+                    <p><i class="fas fa-check-circle"></i> Enable barcode scanning and search functionality</p>
+                    <p><i class="fas fa-check-circle"></i> Generate business analytics and reports</p>
+                    <p><i class="fas fa-check-circle"></i> Improve app features and fix technical issues</p>
+                </div>
+                
+                <p>We process your information based on legitimate business interests, contractual necessity, and with your consent when required.</p>
+            </section>
+
+            <!-- Data Sharing -->
+            <section id="sharing" class="section">
+                <h2><i class="fas fa-share-alt"></i> Data Sharing</h2>
+                <p>We do not sell your personal information to third parties. We may share limited data with:</p>
+                
+                <div class="info-box">
+                    <p><strong>Service Providers</strong> (e.g., cloud hosting, analytics tools) who help operate the App under strict confidentiality agreements</p>
+                    <p><strong>Law Enforcement</strong> when required by law or to protect our legal rights</p>
+                    <p><strong>Business Integrations</strong> if you connect the App to third-party services (with your explicit permission)</p>
+                </div>
+                
+                <p>Any third-party service providers we use are carefully vetted and required to maintain appropriate security measures.</p>
+            </section>
+
+            <!-- Data Storage & Security -->
+            <section id="storage" class="section">
+                <h2><i class="fas fa-lock"></i> Data Storage & Security</h2>
+                <p>We implement robust security measures to protect your information:</p>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-shield-alt"></i> Your data is stored securely in encrypted databases</p>
+                    <p><i class="fas fa-user-shield"></i> Access to sensitive features is protected by authentication</p>
+                    <p><i class="fas fa-sync-alt"></i> Regular security audits and vulnerability testing</p>
+                    <p><i class="fas fa-key"></i> Encryption of data in transit using TLS 1.2+ protocols</p>
+                </div>
+                
+                <p>While we implement industry-standard security measures, no electronic storage method is 100% secure. We continuously work to enhance our security practices.</p>
+            </section>
+
+            <!-- Your Rights -->
+            <section id="rights" class="section">
+                <h2><i class="fas fa-user-check"></i> Your Rights</h2>
+                <p>Depending on your location, you may have rights to:</p>
+                
+                <div class="info-box">
+                    <p><i class="fas fa-download"></i> Access and download your data</p>
+                    <p><i class="fas fa-edit"></i> Correct inaccurate information</p>
+                    <p><i class="fas fa-trash-alt"></i> Request deletion of your account and data</p>
+                    <p><i class="fas fa-ban"></i> Restrict certain processing activities</p>
+                    <p><i class="fas fa-file-export"></i> Data portability in machine-readable format</p>
+                </div>
+                
+                <p>To exercise any of these rights, please contact us at:</p>
+                <p class="highlight">info@horeye.me</p>
+                <p>We will respond to your request within 30 days, as required by applicable law.</p>
+            </section>
+
+            <!-- Children's Privacy -->
+            <section id="children" class="section">
+                <h2><i class="fas fa-child"></i> Children's Privacy</h2>
+                <p>Our App is not intended for individuals under the age of 13 (or the minimum legal age in your region).</p>
+                <p>We do not knowingly collect data from children. If we become aware that a child has provided us with personal information, we will take steps to delete such information.</p>
+            </section>
+
+            <!-- Changes to Policy -->
+            <section id="changes" class="section">
+                <h2><i class="fas fa-sync"></i> Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements.</p>
+                <p>When we make changes, we will:</p>
+                <ul class="info-box">
+                    <li>Update the "Effective Date" at the top of this policy</li>
+                    <li>Post the updated policy in the App</li>
+                    <li>Notify users of significant changes through the App or email</li>
+                </ul>
+                <p>We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+            </section>
+
+            <!-- Contact Us -->
+            <section id="contact" class="section">
+                <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+                <p>If you have questions about this Privacy Policy or our data practices, please contact us:</p>
+                
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h4><i class="fas fa-building"></i> Company</h4>
+                        <p>Scopesale Technologies Inc.</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4><i class="fas fa-envelope"></i> Email</h4>
+                        <p><a href="mailto:privacy@scopesale.com">info@horeye.me</a></p>
+                        <p><a href="mailto:support@scopesale.com">info@horeye.me</a></p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h4><i class="fas fa-map-marker-alt"></i> Address</h4>
+                        <p>Banaadir Mall, floor 4</p>
+                        <p>Mogadishu</p>
+                        <p>Somalia</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-cash-register"></i>
+                        </div>
+                        Scopesale
+                    </a>
+                    <p>Powerful point-of-sale, inventory management, and order tracking for modern businesses. Simplify your operations with Scopesale.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div>
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Partners</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Community</a></li>
+                        </ul>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Scopesale Technologies Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Table of Contents highlighting
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.toc a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
