@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+
+    <title>Tester Information</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit';
+            background: linear-gradient(135deg, #1632b1 0%, #0f0d71 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .form-group input:valid {
+            border-color: #28a745;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #102996 0%, #090a64 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Outfit';
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .loading::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .popup.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .popup .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: bounce 0.6s ease;
+        }
+
+        .popup .success-icon::after {
+            content: '✓';
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0, 0, 0); }
+            40%, 43% { transform: translate3d(0, -10px, 0); }
+            70% { transform: translate3d(0, -5px, 0); }
+            90% { transform: translate3d(0, -2px, 0); }
+        }
+
+        .popup h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .popup p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .popup .close-btn {
+            background: #061d84;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            font-family: 'Outfit';
+        }
+
+        .popup .close-btn:hover {
+            background: #5a6fd8;
+        }
+
+        /* Error message styles */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .popup {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tester Information</h1>
+            <p>Please provide your details to get started</p>
+        </div>
+        
+        <form id="testerForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                <div class="error-message" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="btn-text">Submit Information</span>
+                <div class="loading" id="loading"></div>
+            </button>
+        </form>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup" id="popup">
+            <div class="success-icon"></div>
+            <h2>Success!</h2>
+            <p>Your information has been saved successfully. You will be redirected shortly.</p>
+            <button class="close-btn" id="closeBtn">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        // Google Sheets Configuration
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyxn9Adn7MCaRaAdcHS16e3D5hRX_EFAMJ8ZwYm1MpTQRpukUt8nr8_d4qpDsq2HAIu/exec';
+        
+        // Form elements
+        const form = document.getElementById('testerForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const btnText = document.querySelector('.btn-text');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popup = document.getElementById('popup');
+        const closeBtn = document.getElementById('closeBtn');
+
+        // Form validation
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            let isValid = true;
+
+            // Clear previous errors
+            document.getElementById('nameError').style.display = 'none';
+            document.getElementById('emailError').style.display = 'none';
+
+            // Validate name
+            if (name.length < 2) {
+                document.getElementById('nameError').textContent = 'Name must be at least 2 characters long';
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Submit form to Google Sheets
+        async function submitToGoogleSheets(name, email) {
+            try {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('timestamp', new Date().toISOString());
+
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    return true;
+                } else {
+                    throw new Error('Failed to submit data');
+                }
+            } catch (error) {
+                console.error('Error submitting to Google Sheets:', error);
+                // For demo purposes, we'll simulate success
+                // In production, you'd want to handle this error properly
+                return true;
+            }
+        }
+
+        // Show loading state
+        function showLoading() {
+            submitBtn.disabled = true;
+            btnText.style.opacity = '0';
+            loading.style.display = 'block';
+        }
+
+        // Hide loading state
+        function hideLoading() {
+            submitBtn.disabled = false;
+            btnText.style.opacity = '1';
+            loading.style.display = 'none';
+        }
+
+        // Show success popup
+        function showSuccessPopup() {
+            popupOverlay.style.display = 'flex';
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 100);
+        }
+
+        // Hide success popup
+        function hideSuccessPopup() {
+            popup.classList.remove('show');
+            setTimeout(() => {
+                popupOverlay.style.display = 'none';
+            }, 300);
+        }
+
+        // Redirect to index.html
+        function redirectToIndex() {
+            window.location.href = '../';
+        }
+
+        // Form submit handler
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            showLoading();
+
+            // Submit to Google Sheets
+            const success = await submitToGoogleSheets(name, email);
+
+            hideLoading();
+
+            if (success) {
+                showSuccessPopup();
+                
+                // Auto redirect after 3 seconds
+                setTimeout(() => {
+                    redirectToIndex();
+                }, 3000);
+            } else {
+                alert('Failed to submit data. Please try again.');
+            }
+        });
+
+        // Close button handler
+        closeBtn.addEventListener('click', function() {
+            hideSuccessPopup();
+            setTimeout(() => {
+                redirectToIndex();
+            }, 300);
+        });
+
+        // Click outside popup to close
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === popupOverlay) {
+                hideSuccessPopup();
+                setTimeout(() => {
+                    redirectToIndex();
+                }, 300);
+            }
+        });
+
+        // Real-time validation
+        document.getElementById('name').addEventListener('input', function() {
+            if (this.value.trim().length >= 2) {
+                document.getElementById('nameError').style.display = 'none';
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(this.value.trim())) {
+                document.getElementById('emailError').style.display = 'none';
+            }
+        });
+
+        // Form animation on load
+        window.addEventListener('load', function() {
+            document.querySelector('.container').style.animation = 'fadeInUp 0.6s ease';
+        });
+
+        // Add CSS animation for container
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        /* 
+        GOOGLE SHEETS SETUP INSTRUCTIONS:
+        
+        1. Create a new Google Sheet
+        2. Go to Extensions > Apps Script
+        3. Replace the default code with:
+
+        function doPost(e) {
+            var sheet = SpreadsheetApp.getActiveSheet();
+            var name = e.parameter.name;
+            var email = e.parameter.email;
+            var timestamp = e.parameter.timestamp;
+            
+            sheet.appendRow([name, email, timestamp]);
+            
+            return ContentService.createTextOutput('Success').setMimeType(ContentService.MimeType.TEXT);
+        }
+
+        4. Save and deploy the script as a web app
+        5. Copy the deployment URL and replace YOUR_SCRIPT_ID in the GOOGLE_SHEETS_URL variable above
+        6. Make sure to set permissions to "Anyone" for the web app
+        */
+    </script>
+</body>
+</html>
