@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /favicon/
+Allow: /
+
+Sitemap: https://raadapp.com/sitemap.xml
